@@ -1,5 +1,4 @@
 const Sequelize = require('sequelize')
-const { Umzug, SequelizeStorage }= require('umzug')
 const config = require('./config')
 
 
@@ -15,6 +14,7 @@ const sequelize = new Sequelize(
         dialect: 'postgres',
         port: config.DB_PORT
     });
+
 // > docker exec -it db psql -U postgres -d db_name
 
 const connectToDatabase = async () => {
@@ -30,5 +30,6 @@ const connectToDatabase = async () => {
 
 
 module.exports = {
-    connectToDatabase
+    connectToDatabase,
+    sequelize
 }
