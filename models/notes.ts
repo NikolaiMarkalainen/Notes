@@ -36,4 +36,4 @@ Note.init({
         sequelize
     });
 
-module.exports = Note
+export default Note

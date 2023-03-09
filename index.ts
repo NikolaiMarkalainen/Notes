@@ -1,14 +1,23 @@
-const app = require('./app')
-const http = require('http')
-const { PORT } = require('./utils/config')
+const express = require('express')
+const cors = require('cors')
+import {Noterouter} from './controllers/notes'
+const { PORT } = require('./utils/config');
+const {connectToDatabase} = require('./utils/db')
+const app = express()
+app.use(express.json())
+app.use(cors())
 
-const server = http.createServer(app)
+app.use('/api/notes', Noterouter);
+
 
 const start = async () => {
-    console.log('Connection attempt')
-    await require('./utils/db').connectToDatabase();
-        server.listen(PORT, () => {
-        console.log(`Server running on port: ${PORT}`);
+    await connectToDatabase()
+    app.listen(PORT, () => {
+        console.log(`Server running on port: ${PORT}`)
     })
 }
+
 start()
+
+export default app
+

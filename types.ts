@@ -1,3 +1,5 @@
+import { QueryInterface } from "sequelize";
+
 export type NoteAttributes = {
     id: number,
     title: string,
@@ -5,3 +7,11 @@ export type NoteAttributes = {
     author: string
 }
 
+export interface Migration {
+    name: string;
+    timestamp: number;
+  }
+
+export interface MigrationContext {
+    context: QueryInterface
+}

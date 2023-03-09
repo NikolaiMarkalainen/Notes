@@ -1,7 +1,8 @@
-/*import { DataTypes } from "sequelize"
+import { DataTypes } from "sequelize"
+import { MigrationContext } from "../types";
 
 module.exports = {
-    up: async ({ context: queryInterface}) => {
+    up: async ({context: queryInterface}: MigrationContext) => {
         await queryInterface.createTable('note', {
             id:{
                 type: DataTypes.INTEGER,
@@ -22,8 +23,7 @@ module.exports = {
             },
         })
     },
-    down: async ({ context: queryInterface }) => {
+    down: async ({context: queryInterface} : MigrationContext) => {
         await queryInterface.dropTable('note');
     },
 }
-*/
