@@ -3,6 +3,17 @@ import { MigrationContext } from "../types";
 
 module.exports = {
     up: async ({context: queryInterface}: MigrationContext) => {
+        await queryInterface.createTable('teams', {
+            id:{
+                type: DataTypes.INTEGER,
+                primaryKey: true,
+                autoIncrement: true
+            },
+            name:{
+                type: DataTypes.STRING,
+                allowNull: false
+            },
+        }),
         await queryInterface.createTable('users', {
             id:{
                 type: DataTypes.INTEGER,
@@ -27,6 +38,11 @@ module.exports = {
                 validate:{
                     len: [8,18]
                 }
+            },
+            team_id:{
+                type: DataTypes.INTEGER,
+                allowNull: true,
+                references:{model: 'teams', key: 'id'}
             },
         }),
         console.log(queryInterface);
@@ -53,33 +69,12 @@ module.exports = {
                 allowNull: false,
                 references:{ model: 'users', key: 'id' }
             },
-        }),
-        await queryInterface.createTable('teams', {
-            id:{
-                type: DataTypes.INTEGER,
-                primaryKey: true,
-                autoIncrement: true
-            },
-            name:{
-                type: DataTypes.STRING,
-                allowNull: false
-            },
-            user_id:{
-                type: DataTypes.INTEGER,
-                allowNull: false,
-                references: { model: 'users', key: 'id' }
-            },
-            note_id:{
-                type: DataTypes.INTEGER,
-                allowNull: false,
-                references: { model: 'notes', key: 'id' }
-            },
         })
         },
         
     down: async ({context: queryInterface} : MigrationContext) => {
-        await queryInterface.dropTable('teams');
         await queryInterface.dropTable('notes');
         await queryInterface.dropTable('users');
+        await queryInterface.dropTable('teams');
     },
 }

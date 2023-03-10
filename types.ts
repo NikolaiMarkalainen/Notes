@@ -11,8 +11,6 @@ export type NoteAttributes = {
 export type TeamAttributes = {
     id: number,
     name: string,
-    userId: number,
-    noteId: number,
 }
 
 export type UserAttributes = {
@@ -20,6 +18,7 @@ export type UserAttributes = {
     name: string,
     username: string,
     password: string,
+    teamId: number
 }
 
 

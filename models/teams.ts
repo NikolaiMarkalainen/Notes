@@ -9,7 +9,6 @@ class Team extends Model<TeamAttributes, TeamCreationAttributes> {
     declare id: CreationOptional<number>;
     declare name: String;
     declare userId: CreationOptional<number>;
-    declare noteId: CreationOptional<number>;
 };
 Team.init({
     id:{
@@ -21,16 +20,6 @@ Team.init({
         type: DataTypes.STRING,
         allowNull: false
     },
-    userId:{
-        type: DataTypes.INTEGER,
-        allowNull: false,
-        references: {model: 'users', key: 'id'}
-    },
-    noteId:{
-        type: DataTypes.INTEGER,
-        allowNull: false,
-        references: {model: 'notes', key: 'id'}
-    }
     }, {
         timestamps: false,
         underscored: true,

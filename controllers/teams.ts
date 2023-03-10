@@ -1,12 +1,20 @@
 import { Request, Response } from "express";
 import { Router } from "express";
-import  Team  from '../models/teams';
+import sequelize from "sequelize";
+const  { Team } = require('../models/index');
 
 export const TeamRouter = Router();
 
 
 TeamRouter.get('/', async (_req: Request, res: Response) => {
-    const teams = await Team.findAll({})
+    const teams = await Team.findAll({
+        attributes: {
+            exclude: ['userId', 'noteId'] ,
+            include:[
+                [sequelize.literal('(SELECT COUNT(*) FROM users WHERE users.teamId = Team.id)'), 'members']
+            ]
+        }
+    })
     if(teams) res.json(teams);
 })
 /*

@@ -10,6 +10,7 @@ class User extends Model<UserAttributes, UserCreationAttributes> {
     declare name: String;
     declare username: String;
     declare password: String;
+    declare teamId: CreationOptional<number>;
 };
 User.init({
     id:{
@@ -35,6 +36,11 @@ User.init({
         validate:{
             len: [8,18]
         }
+    },
+    teamId:{
+        type: DataTypes.INTEGER,
+        allowNull: true,
+        references:{model: 'teams', key: 'id'}
     },
     }, {
         sequelize,
