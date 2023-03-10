@@ -1,44 +1,46 @@
 import { Optional, CreationOptional, DataTypes, Model } from "sequelize";
-import { NoteAttributes } from "../types";
+import { UserAttributes } from "../types";
 
 const { sequelize } = require('../utils/db');
 
-type NoteCreationAttributes = Optional<NoteAttributes, 'id'>;
+type UserCreationAttributes = Optional<UserAttributes, 'id'>;
 
-class Note extends Model<NoteAttributes, NoteCreationAttributes> { 
+class User extends Model<UserAttributes, UserCreationAttributes> { 
     declare id: CreationOptional<number>;
-    declare title: string;
-    declare author: string;
-    declare content: string;
+    declare name: String;
+    declare username: String;
+    declare password: String;
 };
-Note.init({
+User.init({
     id:{
         type: DataTypes.INTEGER,
         primaryKey: true,
         autoIncrement: true
     },
-    title:{
+    name:{
         type: DataTypes.STRING,
         allowNull: false
     },
-    author:{
+    username:{
         type: DataTypes.STRING,
-        allowNull: false
-    },
-    content:{
-        type: DataTypes.STRING,
-        allowNull: false
-    },
-    userId:{
-        type: DataTypes.INTEGER,
         allowNull: false,
-        references:{model: 'user', key: 'id'}
+        validate:{
+            isEmail: true
+        },
+        unique: true,
+    },
+    password:{
+        type: DataTypes.STRING,
+        allowNull: false,
+        validate:{
+            len: [8,18]
+        }
     }
     }, {
         timestamps: false,
         underscored: true,
-        modelName: 'note',
+        modelName: 'user',
         sequelize
     });
 
-export default Note
+export default User

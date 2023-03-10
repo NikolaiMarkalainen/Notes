@@ -4,8 +4,24 @@ export type NoteAttributes = {
     id: number,
     title: string,
     content: string,
-    author: string
+    author: string,
+    userId: number
 }
+
+export type TeamAttributes = {
+    id: number,
+    name: string,
+    userId: number,
+    noteId: number,
+}
+
+export type UserAttributes = {
+    id: number,
+    name: string,
+    username: string,
+    password: string,
+}
+
 
 export interface Migration {
     name: string;
@@ -15,3 +31,4 @@ export interface Migration {
 export interface MigrationContext {
     context: QueryInterface
 }
+
