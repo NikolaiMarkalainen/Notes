@@ -15,6 +15,14 @@ export const sequelize = new Sequelize(
         port: config.DB_PORT
     });
 
+    console.log(
+        config.NAME, 
+        config.USER, 
+        config.PASSWORD, 
+        config.HOST,
+        'postgres',
+        config.DB_PORT
+        )
 // > docker exec -it db psql -U postgres -d db_name
 
 export const connectToDatabase = async (): Promise<void> => {
