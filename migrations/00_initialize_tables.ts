@@ -3,7 +3,7 @@ import { MigrationContext } from "../types";
 
 module.exports = {
     up: async ({context: queryInterface}: MigrationContext) => {
-        await queryInterface.createTable('user', {
+        await queryInterface.createTable('users', {
             id:{
                 type: DataTypes.INTEGER,
                 primaryKey: true,
@@ -27,9 +27,10 @@ module.exports = {
                 validate:{
                     len: [8,18]
                 }
-            }
+            },
         }),
-        await queryInterface.createTable('note', {
+        console.log(queryInterface);
+        await queryInterface.createTable('notes', {
             id:{
                 type: DataTypes.INTEGER,
                 primaryKey: true,
@@ -47,15 +48,38 @@ module.exports = {
                 type: DataTypes.STRING,
                 allowNull: false
             },
-            userId:{
+            user_id:{
                 type: DataTypes.INTEGER,
                 allowNull: false,
-                references:{model: 'user', key: 'id'}
+                references:{ model: 'users', key: 'id' }
+            },
+        }),
+        await queryInterface.createTable('teams', {
+            id:{
+                type: DataTypes.INTEGER,
+                primaryKey: true,
+                autoIncrement: true
+            },
+            name:{
+                type: DataTypes.STRING,
+                allowNull: false
+            },
+            user_id:{
+                type: DataTypes.INTEGER,
+                allowNull: false,
+                references: { model: 'users', key: 'id' }
+            },
+            note_id:{
+                type: DataTypes.INTEGER,
+                allowNull: false,
+                references: { model: 'notes', key: 'id' }
             },
         })
-    },
+        },
+        
     down: async ({context: queryInterface} : MigrationContext) => {
-        await queryInterface.dropTable('note');
-        await queryInterface.dropTable('user')
+        await queryInterface.dropTable('teams');
+        await queryInterface.dropTable('notes');
+        await queryInterface.dropTable('users');
     },
 }

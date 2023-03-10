@@ -35,12 +35,12 @@ User.init({
         validate:{
             len: [8,18]
         }
-    }
+    },
     }, {
+        sequelize,
         timestamps: false,
         underscored: true,
-        modelName: 'user',
-        sequelize
+        modelName: 'users',
     });
 
 export default User

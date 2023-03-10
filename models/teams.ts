@@ -24,17 +24,17 @@ Team.init({
     userId:{
         type: DataTypes.INTEGER,
         allowNull: false,
-        references: {model: 'user', key: 'id'}
+        references: {model: 'users', key: 'id'}
     },
     noteId:{
         type: DataTypes.INTEGER,
         allowNull: false,
-        references: {model: 'note', key: 'id'}
+        references: {model: 'notes', key: 'id'}
     }
     }, {
         timestamps: false,
         underscored: true,
-        modelName: 'team',
+        modelName: 'teams',
         sequelize
     });
 

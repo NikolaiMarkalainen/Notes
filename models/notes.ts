@@ -32,12 +32,12 @@ Note.init({
     userId:{
         type: DataTypes.INTEGER,
         allowNull: false,
-        references:{model: 'user', key: 'id'}
+        references:{model: 'users', key: 'id'}
     }
     }, {
         timestamps: false,
         underscored: true,
-        modelName: 'note',
+        modelName: 'notes',
         sequelize
     });
 
