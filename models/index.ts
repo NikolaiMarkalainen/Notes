@@ -3,8 +3,15 @@ import User from "./user";
 import Team from "./teams";
 
 // Relationship between Note and the User
-Note.belongsTo(User);
-User.hasMany(Note);
+// onDelete and onUpdate functionality to be added for all models
+Note.belongsTo(User, {
+    foreignKey: 'user_id',
+    onDelete: 'CASCADE'
+});
+User.hasMany(Note, {
+    foreignKey: 'user_id',
+    onDelete: 'CASCADE'
+});
 
 // Relationship between Team and the User
 User.belongsTo(Team);

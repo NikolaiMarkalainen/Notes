@@ -64,10 +64,15 @@ module.exports = {
                 type: DataTypes.STRING,
                 allowNull: false
             },
+            // onDelete delete the notes of user as well
             user_id:{
                 type: DataTypes.INTEGER,
-                allowNull: false,
-                references:{ model: 'users', key: 'id' }
+                allowNull: true,
+                onDelete: 'CASCADE',
+                references:{ 
+                    model: 'users',
+                    key: 'id',
+                }
             },
             team_id:{
                 type: DataTypes.INTEGER,
@@ -75,6 +80,7 @@ module.exports = {
                 references:{ model: 'teams', key: 'id' }
             },
         })
+        
         },
         
     down: async ({context: queryInterface} : MigrationContext) => {
