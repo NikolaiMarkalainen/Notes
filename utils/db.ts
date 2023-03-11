@@ -22,7 +22,7 @@ export const sequelize = new Sequelize(
         config.HOST,
         'postgres',
         config.DB_PORT
-        )
+        );
 // > docker exec -it db psql -U postgres -d db_name
 
 export const connectToDatabase = async (): Promise<void> => {
@@ -43,21 +43,21 @@ const migrationConf = {
     storage: new SequelizeStorage({ sequelize, tableName: 'migrations'}),
     context: sequelize.getQueryInterface(),
     logger: console,
-}
+};
 
 export const rollBackMigration = async (): Promise <void> => {
-    await sequelize.authenticate()
-    const migrator = new Umzug(migrationConf)
-    await migrator.down()
-}
+    await sequelize.authenticate();
+    const migrator = new Umzug(migrationConf);
+    await migrator.down();
+};
 
 export const runMigrations = async (): Promise <void> => {
-    const migrator = new Umzug(migrationConf)
-    const migrations = await migrator.up()
+    const migrator = new Umzug(migrationConf);
+    const migrations = await migrator.up();
     console.log('Migrations up to date ', {
         files: migrations.map((mig: Migration) =>{
-            mig.name
+            mig.name;
         })
-    })
-}
+    });
+};
 

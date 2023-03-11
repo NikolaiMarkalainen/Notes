@@ -1,4 +1,4 @@
-import { DataTypes } from "sequelize"
+import { DataTypes } from "sequelize";
 import { MigrationContext } from "../types";
 
 module.exports = {
@@ -79,7 +79,7 @@ module.exports = {
                 allowNull: true,
                 references:{ model: 'teams', key: 'id' }
             },
-        })
+        });
         
         },
         
@@ -88,4 +88,4 @@ module.exports = {
         await queryInterface.dropTable('users');
         await queryInterface.dropTable('teams');
     },
-}
+};

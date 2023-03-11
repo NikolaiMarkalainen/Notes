@@ -7,11 +7,11 @@ type UserCreationAttributes = Optional<UserAttributes, 'id'>;
 
 class User extends Model<UserAttributes, UserCreationAttributes> { 
     declare id: CreationOptional<number>;
-    declare name: String;
-    declare username: String;
-    declare password: String;
+    declare name: string;
+    declare username: string;
+    declare password: string;
     declare teamId: CreationOptional<number>;
-};
+}
 User.init({
     id:{
         type: DataTypes.INTEGER,
@@ -49,4 +49,4 @@ User.init({
         modelName: 'users',
     });
 
-export default User
+export default User;

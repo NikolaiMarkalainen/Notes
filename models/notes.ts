@@ -12,7 +12,7 @@ class Note extends Model<NoteAttributes, NoteCreationAttributes> {
     declare content: string;
     declare userId: CreationOptional<number>;
     declare teamId: CreationOptional<number>;
-};
+}
 Note.init({
     id:{
         type: DataTypes.INTEGER,
@@ -48,4 +48,4 @@ Note.init({
         sequelize
     });
 
-export default Note
+export default Note;

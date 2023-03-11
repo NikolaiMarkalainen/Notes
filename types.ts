@@ -7,12 +7,12 @@ export type NoteAttributes = {
     author: string,
     userId: number,
     teamId: number
-}
+};
 
 export type TeamAttributes = {
     id: number,
     name: string,
-}
+};
 
 export type UserAttributes = {
     id: number,
@@ -20,7 +20,7 @@ export type UserAttributes = {
     username: string,
     password: string,
     teamId: number
-}
+};
 
 
 export interface Migration {

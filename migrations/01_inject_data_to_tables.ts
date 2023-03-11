@@ -25,4 +25,4 @@ module.exports = {
         await queryInterface.bulkDelete('users', {}, {});
         await queryInterface.bulkDelete('teams', {}, {});
       }
-}
+};

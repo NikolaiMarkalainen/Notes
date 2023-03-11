@@ -5,7 +5,7 @@ export const UserRouter = Router();
 
 
 UserRouter.get('/', async (_req: Request, res: Response) => {
-    const users = await User.findAll({})
+    const users = await User.findAll({});
     if(users) res.json(users);  
 });
 
@@ -37,6 +37,6 @@ UserRouter.delete('/:id', async (req: Request, res: Response) => {
 
 UserRouter.get('/:id', async (req: Request, res: Response) => {
     const user = await User.findByPk(req.params.id);
-    if(user) res.json(user)
+    if(user) res.json(user);
     else throw Error('Not found');
-})
+});

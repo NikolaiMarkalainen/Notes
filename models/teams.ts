@@ -7,9 +7,9 @@ type TeamCreationAttributes = Optional<TeamAttributes, 'id'>;
 
 class Team extends Model<TeamAttributes, TeamCreationAttributes> { 
     declare id: CreationOptional<number>;
-    declare name: String;
+    declare name: string;
     declare userId: CreationOptional<number>;
-};
+}
 Team.init({
     id:{
         type: DataTypes.INTEGER,
@@ -27,4 +27,4 @@ Team.init({
         sequelize
     });
 
-export default Team
+export default Team;
