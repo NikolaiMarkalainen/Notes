@@ -69,6 +69,11 @@ module.exports = {
                 allowNull: false,
                 references:{ model: 'users', key: 'id' }
             },
+            team_id:{
+                type: DataTypes.INTEGER,
+                allowNull: true,
+                references:{ model: 'teams', key: 'id' }
+            },
         })
         },
         

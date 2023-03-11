@@ -5,7 +5,6 @@
 <li>Docker
 <li>Postgre SQL
 
-
 ##### Some of the tools used in development as well
 <li> Express
 <li> Sequelite
@@ -19,4 +18,5 @@
 
 <img src="/images/Screenshot from 2023-03-10 19-01-31.png">
 
-##### For planning used excalidraw.com
+##### For planning used 
+<li> excalidraw.com

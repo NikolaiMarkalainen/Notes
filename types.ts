@@ -5,7 +5,8 @@ export type NoteAttributes = {
     title: string,
     content: string,
     author: string,
-    userId: number
+    userId: number,
+    teamId: number
 }
 
 export type TeamAttributes = {

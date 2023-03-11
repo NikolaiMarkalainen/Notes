@@ -10,6 +10,8 @@ class Note extends Model<NoteAttributes, NoteCreationAttributes> {
     declare title: string;
     declare author: string;
     declare content: string;
+    declare userId: CreationOptional<number>;
+    declare teamId: CreationOptional<number>;
 };
 Note.init({
     id:{
@@ -33,7 +35,12 @@ Note.init({
         type: DataTypes.INTEGER,
         allowNull: false,
         references:{model: 'users', key: 'id'}
-    }
+    },
+    teamId:{
+        type: DataTypes.INTEGER,
+        allowNull: true,
+        references:{model: 'teams', key: 'id'}
+    },
     }, {
         timestamps: false,
         underscored: true,
