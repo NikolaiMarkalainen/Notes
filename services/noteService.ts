@@ -1,13 +1,38 @@
-import { Request, Response } from "express";
-import { Router } from "express";
-const { Note, User } = require('../models/index');
-export const NoteRouter = Router();
 
+import { Note } from "../models";
+import { NewNoteEntry, NoteAttributes } from "../types";
+
+const notes: NoteAttributes[] = [];
+
+const getNotes = ():  NoteAttributes[] => {
+    return notes;
+};
+
+const findById = async (id: number): Promise<NoteAttributes | null> => {
+    const notes = await Note.findByPk(id);
+    return notes;
+};
+
+
+const createNotes = async (entry: NewNoteEntry): Promise<NewNoteEntry> => {
+    const note = await Note.create(entry);
+    return note;
+};
+
+const removeNote = async (id: number): Promise<number> => {
+    const deletedNote =  await Note.destroy(id);
+    return deletedNote;
+}
+
+export default {
+    createNotes, findById, getNotes, removeNote
+};
+/*
 // wrong import of note causes docker to not launch
 // server reset error
 
 
-NoteRouter.get('/', async (_req: Request, res: Response) => {
+NoteRouter.get('/', async (_req: Request, res: Response): Promise<void> => {
     const notes = await Note.findAll({
         attributes: {exclude: ['userId'] },
         include: {
@@ -50,3 +75,4 @@ NoteRouter.get('/:id', async (req: Request, res: Response) => {
 });
 
 
+*/

@@ -21,4 +21,5 @@ Team.hasMany(User);
 Note.belongsTo(Team);
 Team.hasMany(Note);
 
-module.exports={User, Note, Team};
+export {Note, User, Team};
+

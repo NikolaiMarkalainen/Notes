@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import { Router } from "express";
-const  { Team, User, Note} = require('../models/index');
+import  { Team, User, Note} from '../models/index';
 
 export const TeamRouter = Router();
 

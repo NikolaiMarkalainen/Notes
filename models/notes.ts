@@ -1,7 +1,7 @@
 import { Optional, CreationOptional, DataTypes, Model } from "sequelize";
 import { NoteAttributes } from "../types";
 
-const { sequelize } = require('../utils/db');
+import { sequelize } from '../utils/db';
 
 type NoteCreationAttributes = Optional<NoteAttributes, 'id'>;
 

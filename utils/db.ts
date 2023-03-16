@@ -1,10 +1,10 @@
-const Sequelize = require('sequelize');
-const config = require('./config');
-const { Umzug, SequelizeStorage} = require('umzug');
+import { Sequelize } from 'sequelize';
+import config from './config';
+import { Umzug, SequelizeStorage} from 'umzug';
 import { Migration } from '../types';
 // creating sequelize function with necessary variables
 // to create a connection to my database
-
+console.log(config);
 export const sequelize = new Sequelize(
     config.NAME, 
     config.USER, 
@@ -14,15 +14,6 @@ export const sequelize = new Sequelize(
         dialect: 'postgres',
         port: config.DB_PORT
     });
-
-    console.log(
-        config.NAME, 
-        config.USER, 
-        config.PASSWORD, 
-        config.HOST,
-        'postgres',
-        config.DB_PORT
-        );
 // > docker exec -it db psql -U postgres -d db_name
 
 export const connectToDatabase = async (): Promise<void> => {

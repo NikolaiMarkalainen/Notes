@@ -1,3 +1,8 @@
 import { rollBackMigration } from "./db";
 
-rollBackMigration();
+
+const revertMigration = async () => {
+    await rollBackMigration();
+};
+
+revertMigration().catch((error) => console.error(error));

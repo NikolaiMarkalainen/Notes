@@ -1,3 +1,8 @@
 import { runMigrations } from "./db";
 
-runMigrations();
+
+const loadMigrations = async () => {
+    await runMigrations();
+};
+
+loadMigrations().catch((error) => console.error(error));
