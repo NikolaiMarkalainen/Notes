@@ -1,3 +1,4 @@
+/*
 import { Request, Response } from "express";
 import { Router } from "express";
 import  User  from '../models/user';
@@ -40,3 +41,4 @@ UserRouter.get('/:id', async (req: Request, res: Response) => {
     if(user) res.json(user);
     else throw Error('Not found');
 });
+*/

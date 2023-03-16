@@ -1,3 +1,4 @@
+/*
 import { Request, Response } from "express";
 import { Router } from "express";
 import  { Team, User, Note} from '../models/index';
@@ -47,3 +48,4 @@ TeamRouter.put('/:id', async (req: Request, res: Response) => {
         res.json(team);
     } else throw Error('Not found');
 });
+*/

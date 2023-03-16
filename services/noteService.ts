@@ -20,12 +20,20 @@ const createNotes = async (entry: NewNoteEntry): Promise<NewNoteEntry> => {
 };
 
 const removeNote = async (id: number): Promise<number> => {
-    const deletedNote =  await Note.destroy(id);
+    const deletedNote =  await Note.destroy({where: { id }});
     return deletedNote;
-}
+};
 
-export default {
-    createNotes, findById, getNotes, removeNote
+const updateNote = async (id: number, updateNote: NoteAttributes): Promise<NoteAttributes | null> => {
+    const note = await Note.findByPk(id);
+    if(!note) throw new Error('Not found');
+
+    await note.update(updateNote);
+    return note;
+};
+
+ export default {
+    createNotes, findById, getNotes, removeNote, updateNote
 };
 /*
 // wrong import of note causes docker to not launch

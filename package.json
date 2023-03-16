@@ -3,11 +3,13 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.ts",
+  "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "ts-node": "ts-node",
-    "start": "ts-node index.ts",
-    "dev": "ts-node-dev index.ts",
+    "start": "node --experimental-modules dist/index.js",
+    "dev": "nodemon --experimental-modules dist/index.js",
+    "build":"tsc",
     "lint": "eslint --ext .ts .",
     "migration:down": "ts-node utils/rollMigrations.ts",
     "migration:up": "ts-node --transpile-only utils/runMigrations.ts"
