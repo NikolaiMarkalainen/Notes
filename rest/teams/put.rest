@@ -1,6 +1,6 @@
-PUT http://localhost:5000/api/teams/
+PUT http://localhost:5000/api/teams/1
 Content-Type: application/json
 
 {
-    "name": "tester2";
+    "name": "tester2"
 }

@@ -2,5 +2,5 @@ POST http://localhost:5000/api/teams/
 Content-Type: application/json
 
 {
-    "name": "tester";
+    "name": "Team test"
 }

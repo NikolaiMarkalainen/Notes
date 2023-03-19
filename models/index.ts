@@ -15,11 +15,17 @@ User.hasMany(Note, {
 
 // Relationship between Team and the User
 User.belongsTo(Team);
-Team.hasMany(User);
+Team.hasMany(User, {
+    foreignKey: 'team_id',
+    onDelete: 'SET NULL'
+});
 
 // Relationship between Note and the Team
 Note.belongsTo(Team);
-Team.hasMany(Note);
+Team.hasMany(Note, {
+    foreignKey: 'team_id',
+    onDelete: 'SET NULL'
+});
 
 export {Note, User, Team};
 

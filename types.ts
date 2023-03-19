@@ -11,10 +11,14 @@ export type NoteAttributes = {
 
 export type NewNoteEntry = Omit<NoteAttributes, 'id' | 'teamId'>;
 
+
 export type TeamAttributes = {
     id: number,
     name: string,
 };
+
+export type NewTeamEntry = Omit<TeamAttributes, 'id'>;
+
 
 export type UserAttributes = {
     id: number,
@@ -33,6 +37,8 @@ export interface Migration {
 export interface MigrationContext {
     context: QueryInterface
 }
+
+
 
 export interface Config {
     USER: string,

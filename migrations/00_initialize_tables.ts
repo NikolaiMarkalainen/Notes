@@ -42,6 +42,7 @@ module.exports = {
             team_id:{
                 type: DataTypes.INTEGER,
                 allowNull: true,
+                onDelete: 'SET NULL',
                 references:{model: 'teams', key: 'id'}
             },
         }),
@@ -77,6 +78,7 @@ module.exports = {
             team_id:{
                 type: DataTypes.INTEGER,
                 allowNull: true,
+                onDelete: 'SET NULL',
                 references:{ model: 'teams', key: 'id' }
             },
         });
