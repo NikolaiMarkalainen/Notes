@@ -1,0 +1,9 @@
+PUT http://localhost:5000/api/users/8
+Content-Type: application/json
+
+{
+    "username": "testin1asd23g@google.com",
+    "name": "Mystery Tester",
+    "password": "password",
+    "teamId": 1
+}

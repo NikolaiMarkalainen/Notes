@@ -25,8 +25,10 @@ export type UserAttributes = {
     name: string,
     username: string,
     password: string,
-    teamId: number
+    teamId?: number | null
 };
+
+export type NewUserEntry = Omit<UserAttributes, 'id'>;
 
 
 export interface Migration {

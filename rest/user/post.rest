@@ -1,8 +1,9 @@
-POST http://localhost:5000/api/users
+POST http://localhost:5000/api/users/
 Content-Type: application/json
 
 {
-    "username": "testing@google.com",
+    "username": "testi2n1asd2213g@google.com",
     "name": "Mystery Tester",
-    "password": 1234,
+    "password": "password",
+    "teamId": 1
 }
