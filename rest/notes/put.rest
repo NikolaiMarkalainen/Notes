@@ -1,8 +1,9 @@
-PUT http://localhost:5000/api/notes/
+PUT http://localhost:5000/api/notes/1
 Content-Type: application/json
 
 {
     "author": "testing@google.com",
     "title": "Mystery Tester",
-    "content": 1234,
+    "content": "1234",
+    "userId": 3
 }

@@ -56,5 +56,6 @@ const toNewNoteEntry = (object: unknown): NewNoteEntry => {
     throw new Error('Incorrect data: a field is missing');
 };
 
+
 export default toNewNoteEntry;
 

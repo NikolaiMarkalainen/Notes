@@ -5,4 +5,5 @@ Content-Type: application/json
     "author": "testing@google.com",
     "title": "Mystery Tester",
     "content": "1234",
+    "userId": 1
 }

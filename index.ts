@@ -1,8 +1,8 @@
 import express from 'express';
 import cors from 'cors';
-import NoteRouter from './routes/noteRoute.js';
-import config from './utils/config.js';
-import { connectToDatabase } from './utils/db.js';
+import NoteRouter from './routes/noteRoute';
+import config from './utils/config';
+import { connectToDatabase } from './utils/db';
 
 const app = express();
 app.use(express.json());
