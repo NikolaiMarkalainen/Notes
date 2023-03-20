@@ -1,3 +1,4 @@
+import { NextFunction, Request, Response } from "express";
 import { QueryInterface } from "sequelize";
 
 export type NoteAttributes = {
@@ -40,6 +41,12 @@ export interface MigrationContext {
     context: QueryInterface
 }
 
+export interface ErrorHandling {
+    error: Error,
+    res: Response,
+    req: Request,
+    next: NextFunction
+}
 
 
 export interface Config {

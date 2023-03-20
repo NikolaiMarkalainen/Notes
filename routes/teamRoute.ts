@@ -13,38 +13,34 @@ router.get('/', (async (_req, res) => {
 }) as RequestHandler);
 
 
-router.get('/:id', (req,res) => {
-    teamService.findById(Number(req.params.id))
-    .then(team => {
-            if(!team) throw Error('Not found');
-            res.send(team);
-        }).catch(error => {
-            console.error(error);
-            res.status(500).send('Server side error');
-        });
-});
+router.get('/:id', (async (req,res) => {
+    const team = await teamService.findById(Number(req.params.id));
+    if(team) res.send(team);
+    else throw Error('Not found');
+
+}) as RequestHandler);
 
 router.post('/', (async (req,res) => {
-    console.log('in post methoid!!!');
     const newTeam = toNewTeamEntry(req.body);
     const addedTeam = await teamService.createTeam(newTeam);
-    res.json(addedTeam);
+    if (addedTeam) res.json(addedTeam);
+    else throw Error('Bad data');
 }) as RequestHandler);
 
 
-router.delete('/:id', (async (req, res) => {
-    await teamService.removeTeam(Number(req.params.id))
-    .then(() => {
-            res.status(204).send('Deleted successfuly');
-        }).catch((error) => res.send(error));
+router.delete('/:id', (async (req, _res) => {
+    const deleted = await teamService.removeTeam(Number(req.params.id));
+    if(deleted) throw Error('Deleted');
+    else throw Error('Not found');
+
 }) as RequestHandler);
 
 
 router.put('/:id', (async (req, res) => {
     const newTeam = toNewTeamEntry(req.body) as TeamAttributes;
-    console.log(newTeam);
     const addedTeam = await teamService.updateTeam(Number(req.params.id), newTeam);
-    res.json(addedTeam);
+    if (addedTeam) res.json(addedTeam);
+    else throw Error('Bad data');
 }) as RequestHandler );
 
 

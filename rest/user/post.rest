@@ -2,8 +2,7 @@ POST http://localhost:5000/api/users/
 Content-Type: application/json
 
 {
-    "username": "testi2n1asd2213g@google.com",
+    "username": "testi2n1asddasda2213g@google.com",
     "name": "Mystery Tester",
-    "password": "password",
-    "teamId": 1
+    "password": "password"
 }

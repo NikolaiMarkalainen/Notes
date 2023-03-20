@@ -7,15 +7,19 @@ const getUsers = async  (): Promise <UserAttributes[]> => {
     return users;
 };
 
-const findById = async (id: number): Promise<UserAttributes | null> => {
+const findById = async (id: number): Promise<UserAttributes> => {
     const user = await User.findByPk(id);
-    return user;
+    if(user) return user;
+    else throw Error('Not found');
 };
 
 
 const createUser = async (entry: NewUserEntry): Promise<NewUserEntry> => {
+    const existingUser =  await User.findOne({ where: { username: entry.username }});
+    if(existingUser) throw new Error('Username already exists');
     const user = await User.create(entry);
-    return user;
+    if(user) return user;
+    else throw new Error('Bad data');
 };
 
 const removeUser = async (id: number): Promise<number> => {

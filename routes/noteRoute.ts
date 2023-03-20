@@ -9,39 +9,35 @@ const router = express.Router();
 
 router.get('/', (async (_req, res) => {
     const notes = await noteService.getNotes();
-    res.send(notes);
+    if(notes)res.send(notes);
+    else throw Error('Not found');
 }) as RequestHandler);
 
-router.get('/:id', (req,res) => {
-    noteService.findById(Number(req.params.id)).then(
-        note => {
-            if(!note) throw Error('Not found');
-            res.send(note);
-        }).catch(error => {
-            console.error(error);
-            res.status(500).send('Server side error');
-        });
-});
+router.get('/:id', (async (req,res) => {
+    const note = await noteService.findById(Number(req.params.id));
+    if(note) res.send(note);
+    else throw Error('Not found');
+}) as RequestHandler );
 
-router.post('/', (req,res) => {
+router.post('/', (async (req, res) => {
     const newNote = toNewNoteEntry(req.body);
-    console.log(newNote);
-    const addedNote = noteService.createNotes(newNote);
-    res.json(addedNote);
-});
+    const addedNote = await noteService.createNotes(newNote);
+    if (addedNote) res.json(addedNote);
+    else throw Error('Bad data');
+}) as RequestHandler );
 
-router.delete('/:id', (req, res) => {
-    noteService.removeNote(Number(req.params.id)).then(
-        () => {
-            res.status(204).send('Deleted successfuly');
-        }).catch((error) => res.send(error));
-});
+router.delete('/:id', (async (req, _res) => {
+    const deleted = await noteService.removeNote(Number(req.params.id));
+    if(deleted) throw Error('Deleted');
+    else throw Error('Not found');
+}) as RequestHandler );
 
-router.put('/:id', (req, res) => {
+router.put('/:id', (async (req, res) => {
     const newNote = toNewNoteEntry(req.body) as NoteAttributes;
-    const addedNote = noteService.updateNote(Number(req.params.id), newNote);
-    res.json(addedNote);
-});
+    const addedNote = await noteService.updateNote(Number(req.params.id), newNote);
+    if (addedNote) res.json(addedNote);
+    else throw Error('Bad data');
+}) as RequestHandler );
 
 
 export default router;

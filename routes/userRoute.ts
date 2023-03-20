@@ -4,46 +4,43 @@ import { RequestHandler } from "express";
 import toNewUserEntry from "../utils/userUtils";
 import { UserAttributes } from "../types";
 const router = express.Router();
-
 // async has to be labeled as RequestHandler to function properly in requests
+
+
 
 router.get('/', (async (_req, res) => {
     const users = await userService.getUsers();
-    res.send(users);
+    if(users) res.send(users); 
+    else throw Error('Not found');
 }) as RequestHandler);
 
 
-router.get('/:id', (req,res) => {
-    userService.findById(Number(req.params.id))
-    .then(user => {
-            if(!user) throw Error('Not found');
-            res.send(user);
-        }).catch(error => {
-            console.error(error);
-            res.status(500).send('Server side error');
-        });
-});
+router.get('/:id', (async (req,res) => {
+    const user = await userService.findById(Number(req.params.id));
+    if(user) res.send(user);
+    else throw Error('Not found'); 
+}) as RequestHandler );
 
-router.post('/', (async (req,res) => {
+router.post('/', (async (req, res) => {
     const newUser = toNewUserEntry(req.body);
-    console.log(newUser);
     const addedUser = await userService.createUser(newUser);
-    res.json(addedUser);
+    if(addedUser) res.json(addedUser);
+    else throw Error('Bad data');
 }) as RequestHandler);
 
 
-router.delete('/:id', (async (req, res) => {
-    await userService.removeUser(Number(req.params.id))
-    .then(() => {
-            res.status(204).send('Deleted successfuly');
-        }).catch((error) => res.send(error));
+router.delete('/:id', (async (req, _res) => {
+    const deleted = await userService.removeUser(Number(req.params.id));
+    if(deleted) throw Error('Deleted');
+    else throw Error('Not found');
 }) as RequestHandler);
 
 
 router.put('/:id', (async (req, res) => {
     const newUser = toNewUserEntry(req.body) as UserAttributes;
     const addedUser = await userService.updateUser(Number(req.params.id), newUser);
-    res.json(addedUser);
+    if(addedUser) res.json(addedUser);
+    else throw Error('Bad data');
 }) as RequestHandler );
 
 

@@ -37,21 +37,22 @@ const parseTeam = (team: unknown) : number | null => {
     return team;
 };
 
-const toNewUserEntry = (object: NewUserEntry): NewUserEntry => {
+const toNewUserEntry = (object: unknown): NewUserEntry => {
     if(!object || typeof object !== 'object'){
-        throw new Error('Incorrect or missing data');
+        throw Error('Incorrect or missing data');
     }
     if('name' in object && 'username' in object && 'password' in object) {
         const newUser: NewUserEntry = {
             name: parseName(object.name),
             username: parseUsername(object.username),
             password: parsePassword(object.password),
-            teamId: parseTeam(object.teamId),
         };
-
-    return newUser;
+        if('teamId' in object) {
+            newUser.teamId = parseTeam(object.teamId);
+        }
+        return newUser;
     }
-    throw new Error('Incorrect or missing data');
+    throw Error('Incorrect or missing data');
 };
 
 
