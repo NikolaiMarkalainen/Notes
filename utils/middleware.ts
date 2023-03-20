@@ -8,7 +8,7 @@ const errorHandler = (error: Error, _req: Request, res: Response, _next: NextFun
         case 'No data':
         case 'Not found':
                 return res.status(404).send({ message: 'No data behind endpoint'}); 
-                
+
         case 'Bad data':
             return res.status(400).send({ message: 'Data is malformatted enter data in correct format!'});
 
@@ -47,6 +47,7 @@ const errorHandler = (error: Error, _req: Request, res: Response, _next: NextFun
 
         case 'Deleted':
             return res.status(200).send({ message: 'Deleted successfully.'});
+            
         default:
             return res.status(500).send({ message: 'Something went wrong'});
     }
