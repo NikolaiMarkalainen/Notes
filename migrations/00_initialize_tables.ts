@@ -39,6 +39,10 @@ module.exports = {
                     len: [8,18]
                 }
             },
+            admin: {
+                type: DataTypes.BOOLEAN,
+                defaultValue: false
+            },
             team_id:{
                 type: DataTypes.INTEGER,
                 allowNull: true,

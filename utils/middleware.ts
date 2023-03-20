@@ -1,8 +1,14 @@
 import { NextFunction, Request, Response } from "express";
 
+/*
+const tokenExtractor = async (req, res, next) => {
+    const authorization = req.get('authorization');
+}
+*/
 
 const errorHandler = (error: Error, _req: Request, res: Response, _next: NextFunction) => {
     console.log('IN ERROR HANDLER');
+    console.log(error);
     console.log(error.message);
     switch(error.message){
         case 'No data':
@@ -47,7 +53,7 @@ const errorHandler = (error: Error, _req: Request, res: Response, _next: NextFun
 
         case 'Deleted':
             return res.status(200).send({ message: 'Deleted successfully.'});
-            
+
         default:
             return res.status(500).send({ message: 'Something went wrong'});
     }

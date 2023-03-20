@@ -26,6 +26,7 @@ export type UserAttributes = {
     name: string,
     username: string,
     password: string,
+    admin: boolean,
     teamId?: number | null
 };
 
@@ -58,3 +59,7 @@ export interface Config {
     PORT: number
 }
 
+export type LoginData = {
+    username: string,
+    password: string
+};

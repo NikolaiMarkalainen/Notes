@@ -1,7 +1,6 @@
 
 import { User } from "../models/index";
 import { NewUserEntry, UserAttributes } from "../types";
-
 const getUsers = async  (): Promise <UserAttributes[]> => {
     const users = await User.findAll();
     return users;
