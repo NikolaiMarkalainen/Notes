@@ -22,7 +22,7 @@ router.get('/:id', (async (req,res) => {
 }) as RequestHandler );
 
 router.post('/', (async (req, res) => {
-    const newUser = await toNewUserEntry(req.body);
+    const newUser = toNewUserEntry(req.body);
     console.log(newUser);
     const addedUser = await userService.createUser(newUser);
     console.log(addedUser);
@@ -39,7 +39,7 @@ router.delete('/:id', (async (req, _res) => {
 
 
 router.put('/:id', (async (req, res) => {
-    const newUser = await toNewUserEntry(req.body) as UserAttributes;
+    const newUser = toNewUserEntry(req.body) as UserAttributes;
     const addedUser = await userService.updateUser(Number(req.params.id), newUser);
     if(addedUser) res.json(addedUser);
     else throw Error('Bad data');

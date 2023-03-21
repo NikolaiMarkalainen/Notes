@@ -3,6 +3,9 @@ import noteService from '../services/noteService';
 import { RequestHandler } from "express";
 import toNewNoteEntry from "../utils/noteUtils";
 import { NoteAttributes } from "../types";
+import middleware from "../utils/middleware";
+import { User } from "../models";
+import { AuthenticatedRequest } from "../types";
 const router = express.Router();
 
 // async has to be labeled as RequestHandler to function properly in requests
@@ -19,12 +22,13 @@ router.get('/:id', (async (req,res) => {
     else throw Error('Not found');
 }) as RequestHandler );
 
-router.post('/', (async (req, res) => {
+router.post('/', middleware.tokenExtractor, (async (req : AuthenticatedRequest, res) => {
+    console.log(User.findByPk(req.user.id));
     const newNote = toNewNoteEntry(req.body);
     const addedNote = await noteService.createNotes(newNote);
     if (addedNote) res.json(addedNote);
     else throw Error('Bad data');
-}) as RequestHandler );
+}) as RequestHandler);
 
 router.delete('/:id', (async (req, _res) => {
     const deleted = await noteService.removeNote(Number(req.params.id));

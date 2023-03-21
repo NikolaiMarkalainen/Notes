@@ -1,10 +1,35 @@
 import { NextFunction, Request, Response } from "express";
+import config from './config';
+import { User, Session } from "../models/index";
+import { AuthenticatedRequest } from "../types";
+import jwt from "jsonwebtoken";
 
-/*
-const tokenExtractor = async (req, res, next) => {
+const tokenExtractor = async (req: AuthenticatedRequest, _res: Response, next: NextFunction) => {
     const authorization = req.get('authorization');
-}
-*/
+    if(authorization && authorization.toLowerCase().startsWith('bearer ')){
+        const token = authorization.substring(7);
+        try{
+            const session = await Session.findOne({where: {token}});
+            if(!session) throw Error('Invalid session');
+
+            const user = await User.findByPk(session.userId);
+
+            if(!user) throw Error('Invalid session');
+
+            const decodedToken = jwt.verify(token, config.SECRET);
+            
+            req.token = token;
+            req.decodedToken = decodedToken;
+            req.user = user;
+
+        } catch{
+            throw Error('Invalid token');
+        }
+    }
+     else throw Error('Missing token');
+    next();
+};
+
 
 const errorHandler = (error: Error, _req: Request, res: Response, _next: NextFunction) => {
     console.log('IN ERROR HANDLER');
@@ -54,6 +79,14 @@ const errorHandler = (error: Error, _req: Request, res: Response, _next: NextFun
         case 'Deleted':
             return res.status(200).send({ message: 'Deleted successfully.'});
 
+        case 'Invalid session':
+            return res.status(401).send({ message: 'Invalid session'});
+
+        case 'Missing token':
+            return res.status(400).send({ message: 'Token missing from request'});
+
+        case 'Invalid token':
+            return res.status(400).send({ message: 'Token is invalid'});
         default:
             return res.status(500).send({ message: 'Something went wrong'});
     }
@@ -62,5 +95,6 @@ const errorHandler = (error: Error, _req: Request, res: Response, _next: NextFun
 
 
 export default {
-    errorHandler
+    errorHandler,
+    tokenExtractor
 };

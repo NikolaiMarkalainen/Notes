@@ -85,12 +85,29 @@ module.exports = {
                 onDelete: 'SET NULL',
                 references:{ model: 'teams', key: 'id' }
             },
+        }),
+        await queryInterface.createTable('sessions', {
+            id:{
+              type: DataTypes.UUID,
+              primaryKey: true,
+              defaultValue: DataTypes.UUIDV4
+            },
+            user_id: {
+                type: DataTypes.INTEGER,
+                allowNull: false,
+                references: { model: 'users', key: 'id'},
+            },
+            token: {
+                type: DataTypes.STRING,
+                allowNull: false,
+                unique: true
+            },
         });
-        
         },
         
     down: async ({context: queryInterface} : MigrationContext) => {
         await queryInterface.dropTable('notes');
+        await queryInterface.dropTable('sessions');
         await queryInterface.dropTable('users');
         await queryInterface.dropTable('teams');
     },

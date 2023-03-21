@@ -4,6 +4,7 @@ import cors from 'cors';
 import NoteRouter from './routes/noteRoute';
 import TeamRouter from './routes/teamRoute';
 import UserRouter from './routes/userRoute';
+//import LoginRouter from './routes/loginRoute';
 import Middleware from './utils/middleware';
 import config from './utils/config';
 import { connectToDatabase } from './utils/db';
@@ -15,7 +16,7 @@ app.use(cors());
 app.use('/api/notes', NoteRouter);
 app.use('/api/teams', TeamRouter);
 app.use('/api/users', UserRouter);
-
+//app.use('/api/login', LoginRouter);
 app.use(Middleware.errorHandler);
 
 const start = async () => {

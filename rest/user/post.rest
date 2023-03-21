@@ -2,7 +2,7 @@ POST http://localhost:5000/api/users/
 Content-Type: application/json
 
 {
-    "username": "testi2nasddasdassadasd1asddasdasdasda2213g@g2oogle.com",
+    "username": "testi2nasasdddasdaasdassadasd1asddasdasdasda2213g@g2oogle.com",
     "name": "Mystery Tester",
     "password": "passwordasdasdd",
     "admin": true

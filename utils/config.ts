@@ -9,7 +9,8 @@ const config : Config = {
     PASSWORD: process.env.DB_PASSWORD || '',
     // paradix , 10 if necessary interpreting strings to numbers
     DB_PORT: process.env.DB_PORT ? parseInt(process.env.DB_PORT, 10) : 5432,
-    PORT: process.env.PORT ? parseInt(process.env.PORT, 10) : 5000
+    PORT: process.env.PORT ? parseInt(process.env.PORT, 10) : 5000,
+    SECRET: process.env.SECRET || ''
 };
 
 export default config;
