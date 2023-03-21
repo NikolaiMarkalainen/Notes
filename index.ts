@@ -4,6 +4,7 @@ import cors from 'cors';
 import NoteRouter from './routes/noteRoute';
 import TeamRouter from './routes/teamRoute';
 import UserRouter from './routes/userRoute';
+import LoginRouter from './routes/loginRoute';
 //import LoginRouter from './routes/loginRoute';
 import Middleware from './utils/middleware';
 import config from './utils/config';
@@ -16,6 +17,7 @@ app.use(cors());
 app.use('/api/notes', NoteRouter);
 app.use('/api/teams', TeamRouter);
 app.use('/api/users', UserRouter);
+app.use('/api/login', LoginRouter);
 //app.use('/api/login', LoginRouter);
 app.use(Middleware.errorHandler);
 

@@ -88,9 +88,9 @@ module.exports = {
         }),
         await queryInterface.createTable('sessions', {
             id:{
-              type: DataTypes.UUID,
-              primaryKey: true,
-              defaultValue: DataTypes.UUIDV4
+                type: DataTypes.INTEGER,
+                primaryKey: true,
+                autoIncrement: true
             },
             user_id: {
                 type: DataTypes.INTEGER,

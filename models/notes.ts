@@ -1,17 +1,17 @@
-import { Optional, CreationOptional, DataTypes, Model } from "sequelize";
+import { Optional, DataTypes, Model } from "sequelize";
 import { NoteAttributes } from "../types";
 
 import { sequelize } from '../utils/db';
 
-type NoteCreationAttributes = Optional<NoteAttributes, 'id'>;
+type NoteCreationAttributes = Optional<NoteAttributes, 'id' | 'teamId'>;
 
 class Note extends Model<NoteAttributes, NoteCreationAttributes> { 
-    declare id: CreationOptional<number>;
+    declare id: number;
     declare title: string;
     declare author: string;
     declare content: string;
-    declare userId: CreationOptional<number>;
-    declare teamId: CreationOptional<number>;
+    declare userId: number;
+    declare teamId: number;
 }
 Note.init({
     id:{

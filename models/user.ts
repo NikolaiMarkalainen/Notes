@@ -1,17 +1,17 @@
-import { Optional, CreationOptional, DataTypes, Model } from "sequelize";
+import { Optional, DataTypes, Model } from "sequelize";
 import { UserAttributes } from "../types";
 import bcrypt from 'bcrypt';
 import { sequelize } from '../utils/db';
 
-type UserCreationAttributes = Optional<UserAttributes, 'id'>;
+type UserCreationAttributes = Optional<UserAttributes, 'id' | 'teamId'>;
 
 class User extends Model<UserAttributes, UserCreationAttributes> { 
-    declare id: CreationOptional<number>;
+    declare id: number;
     declare name: string;
     declare username: string;
     declare password: string;
     declare admin: boolean;
-    declare teamId: CreationOptional<number>;
+    declare teamId: number;
 }
 User.init({
     id:{

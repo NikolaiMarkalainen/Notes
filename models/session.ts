@@ -1,4 +1,4 @@
-import { DataTypes, Model, Optional, CreationOptional } from "sequelize";
+import { DataTypes, Model, Optional } from "sequelize";
 import {sequelize} from '../utils/db';
 import { SessionAttributes } from "../types";
 
@@ -6,7 +6,7 @@ import { SessionAttributes } from "../types";
 type SessionCreationAttributes = Optional<SessionAttributes, 'id' >;
 
 class Session extends Model <SessionAttributes, SessionCreationAttributes> {
-    declare id: CreationOptional<number>;
+    declare id?: number;
     declare userId: number;
     declare token: string;
 }

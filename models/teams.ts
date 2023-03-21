@@ -1,4 +1,4 @@
-import { Optional, CreationOptional, DataTypes, Model } from "sequelize";
+import { Optional, DataTypes, Model } from "sequelize";
 import { TeamAttributes } from "../types";
 
 import { sequelize } from '../utils/db';
@@ -6,9 +6,9 @@ import { sequelize } from '../utils/db';
 type TeamCreationAttributes = Optional<TeamAttributes, 'id'>;
 
 class Team extends Model<TeamAttributes, TeamCreationAttributes> { 
-    declare id: CreationOptional<number>;
+    declare id: number;
     declare name: string;
-    declare userId: CreationOptional<number>;
+    declare userId: number;
 }
 Team.init({
     id:{

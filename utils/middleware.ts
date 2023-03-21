@@ -87,6 +87,16 @@ const errorHandler = (error: Error, _req: Request, res: Response, _next: NextFun
 
         case 'Invalid token':
             return res.status(400).send({ message: 'Token is invalid'});
+
+        case 'Incorrect username format':
+            return res.status(400).send({ message: 'Username format is invalid' });
+            
+        case 'Incorrect password format':
+            return res.status(400).send({ message: 'Password format is invalid' });
+
+        case 'Incorrect username or password':
+            return res.status(401).send({ message: 'Incorrect username or password' });
+
         default:
             return res.status(500).send({ message: 'Something went wrong'});
     }
