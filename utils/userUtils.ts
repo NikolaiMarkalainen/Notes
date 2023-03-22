@@ -1,4 +1,4 @@
-import { NewUserEntry } from "../types";
+import { NewUserEntry,UpdateUserEntry } from "../types";
 
 
 const isString = (text: unknown): text is string => {
@@ -49,7 +49,7 @@ const parseTeam = (team: unknown) : number | null => {
     return team;
 };
 
-const toNewUserEntry = (object: unknown): NewUserEntry => {
+export const toNewUserEntry = (object: unknown): NewUserEntry => {
     if(!object || typeof object !== 'object'){
         throw Error('Incorrect or missing data');
     }
@@ -68,5 +68,32 @@ const toNewUserEntry = (object: unknown): NewUserEntry => {
     throw Error('Incorrect or missing data');
 };
 
+export const updateUserEntry = (object: unknown): UpdateUserEntry => {
+    if(!object || typeof object !== 'object'){
+        console.log('here');
+        throw Error('Incorrect or missing data');
+    }
+    if('name' in object ||'username' in object || 'password' in object || 'admin' in object || 'teamId' in object) {
+        console.log('here');
+        const newUser: UpdateUserEntry = {};
 
-export default toNewUserEntry;
+        if('password' in object) {
+            newUser.password = parsePassword(object.password);
+        }
+        if('name' in object) {
+            newUser.name = parseName(object.name);
+        }
+        if('username' in object) {
+            newUser.username = parseUsername(object.username);
+        }
+        
+        if('admin' in object){
+            newUser.admin = parseAdmin(object.admin);
+        }
+        if('teamId' in object) {
+            newUser.teamId = parseTeam(object.teamId);
+        }
+        return newUser;
+    }
+    throw Error('Incorrect or missing data');
+};

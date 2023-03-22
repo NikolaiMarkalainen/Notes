@@ -1,8 +1,10 @@
 import { NewTeamEntry } from "../types";
 
+
 const isString = (text: unknown): text is string => {
     return typeof text === 'string' || text instanceof String;
 };
+
 
 const parseName =  (name: unknown): string => {
     if(!name || !isString(name)){
@@ -12,13 +14,14 @@ const parseName =  (name: unknown): string => {
 };
 
 
+
 const toNewTeamEntry = (object: unknown): NewTeamEntry => {
     if(!object || typeof object !== 'object'){
         throw new Error('Incorrect or missing data');
     }
-    if('name' in object) {
+    if('name' in object ) {
         const newTeam: NewTeamEntry = {
-            name: parseName(object.name)
+            name: parseName(object.name),
         };
 
     return newTeam;

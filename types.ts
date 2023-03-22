@@ -1,8 +1,7 @@
 import { NextFunction, Request, Response } from "express";
 import { JwtPayload } from "jsonwebtoken";
-import { QueryInterface } from "sequelize";
+import { QueryInterface, Sequelize } from "sequelize";
 import { User } from "./models";
-
 export type NoteAttributes = {
     id: number,
     title: string,
@@ -41,6 +40,14 @@ export type UserAttributes = {
 
 export type NewUserEntry = Omit<UserAttributes, 'id'>;
 
+export type UpdateUserEntry = {
+    id?: number,
+    name?: string,
+    username?: string,
+    password?: string,
+    admin?: boolean,
+    teamId?: number | null
+};
 
 export interface Migration {
     name: string;
@@ -48,7 +55,8 @@ export interface Migration {
   }
 
 export interface MigrationContext {
-    context: QueryInterface
+    context: QueryInterface,
+    Sequelize?: Sequelize
 }
 
 export interface ErrorHandling {
@@ -79,3 +87,9 @@ export interface AuthenticatedRequest extends Request {
     token: string,
     decodedToken: string | JwtPayload;
 }
+
+export type OwnerAttributes = {
+    id: number,
+    userId: number,
+    teamId: number
+};

@@ -39,18 +39,11 @@ module.exports = {
                     len: [8,18]
                 }
             },
-            admin: {
+            admin:{
                 type: DataTypes.BOOLEAN,
-                defaultValue: false
-            },
-            team_id:{
-                type: DataTypes.INTEGER,
-                allowNull: true,
-                onDelete: 'SET NULL',
-                references:{model: 'teams', key: 'id'}
-            },
+                defaultValue: false,
+            }
         }),
-        console.log(queryInterface);
         await queryInterface.createTable('notes', {
             id:{
                 type: DataTypes.INTEGER,
@@ -70,21 +63,6 @@ module.exports = {
                 allowNull: false
             },
             // onDelete delete the notes of user as well
-            user_id:{
-                type: DataTypes.INTEGER,
-                allowNull: true,
-                onDelete: 'SET NULL',
-                references:{ 
-                    model: 'users',
-                    key: 'id',
-                }
-            },
-            team_id:{
-                type: DataTypes.INTEGER,
-                allowNull: true,
-                onDelete: 'SET NULL',
-                references:{ model: 'teams', key: 'id' }
-            },
         }),
         await queryInterface.createTable('sessions', {
             id:{
@@ -92,23 +70,25 @@ module.exports = {
                 primaryKey: true,
                 autoIncrement: true
             },
-            user_id: {
-                type: DataTypes.INTEGER,
-                allowNull: false,
-                references: { model: 'users', key: 'id'},
-            },
             token: {
                 type: DataTypes.STRING,
                 allowNull: false,
                 unique: true
             },
+        }),
+        await queryInterface.createTable('owners', {
+            id:{
+                type: DataTypes.INTEGER,
+                primaryKey: true,
+                autoIncrement: true
+            },
         });
         },
-        
     down: async ({context: queryInterface} : MigrationContext) => {
-        await queryInterface.dropTable('notes');
-        await queryInterface.dropTable('sessions');
-        await queryInterface.dropTable('users');
-        await queryInterface.dropTable('teams');
+        await queryInterface.dropTable('notes', {cascade: true});
+        await queryInterface.dropTable('sessions', {cascade: true});
+        await queryInterface.dropTable('owners', {cascade: true});
+        await queryInterface.dropTable('users', {cascade: true});
+        await queryInterface.dropTable('teams', {cascade: true});
     },
 };

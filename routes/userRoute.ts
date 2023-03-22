@@ -1,7 +1,7 @@
 import express from "express";
 import userService from '../services/userService';
 import { RequestHandler } from "express";
-import toNewUserEntry from "../utils/userUtils";
+import {toNewUserEntry, updateUserEntry} from "../utils/userUtils";
 import { UserAttributes } from "../types";
 const router = express.Router();
 // async has to be labeled as RequestHandler to function properly in requests
@@ -39,7 +39,7 @@ router.delete('/:id', (async (req, _res) => {
 
 
 router.put('/:id', (async (req, res) => {
-    const newUser = toNewUserEntry(req.body) as UserAttributes;
+    const newUser = updateUserEntry(req.body) as UserAttributes;
     const addedUser = await userService.updateUser(Number(req.params.id), newUser);
     if(addedUser) res.json(addedUser);
     else throw Error('Bad data');

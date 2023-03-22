@@ -8,7 +8,6 @@ type TeamCreationAttributes = Optional<TeamAttributes, 'id'>;
 class Team extends Model<TeamAttributes, TeamCreationAttributes> { 
     declare id: number;
     declare name: string;
-    declare userId: number;
 }
 Team.init({
     id:{
