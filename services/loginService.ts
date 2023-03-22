@@ -3,6 +3,7 @@ import { LoginData } from "../types";
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import config from "../utils/config";
+
 const login = async (entry: LoginData): Promise <LoginData> => {
     const user = await User.findOne({ where: {username: entry.username}});
 

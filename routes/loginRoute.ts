@@ -7,7 +7,7 @@ const router = express.Router();
 router.post('/', (async (req: Request, res: Response) => {
     const loginData =  LoginEntry(req.body);
     const user = await loginService.login(loginData);
-    return res.status(200).json({user});
+    return res.status(200).json({message: `${user.username} Successfully logged in`});
 }) as RequestHandler );
 
 

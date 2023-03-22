@@ -11,7 +11,7 @@ class Note extends Model<NoteAttributes, NoteCreationAttributes> {
     declare author: string;
     declare content: string;
     declare userId: number;
-    declare teamId: number;
+    declare teamId?: number;
 }
 Note.init({
     id:{
