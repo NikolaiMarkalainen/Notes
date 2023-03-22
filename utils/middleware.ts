@@ -97,6 +97,9 @@ const errorHandler = (error: Error, _req: Request, res: Response, _next: NextFun
         case 'Incorrect username or password':
             return res.status(401).send({ message: 'Incorrect username or password' });
 
+        case 'Note not found':
+            return res.status(404).send({ message: 'Note not found'});
+
         default:
             return res.status(500).send({ message: 'Something went wrong'});
     }

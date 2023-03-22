@@ -32,15 +32,19 @@ router.post('/', middleware.tokenExtractor, (async (req : AuthenticatedRequest, 
     else throw Error('Bad data');
 }) as RequestHandler);
 
-router.delete('/:id', (async (req, _res) => {
-    const deleted = await noteService.removeNote(Number(req.params.id));
+router.delete('/:id', middleware.tokenExtractor, (async (req: AuthenticatedRequest , _res) => {
+    const deleted = await noteService.removeNote(Number(req.params.id), Number(req.user.id));
     if(deleted) throw Error('Deleted');
     else throw Error('Not found');
 }) as RequestHandler );
 
-router.put('/:id', (async (req, res) => {
-    const newNote = toNewNoteEntry(req.body) as NoteAttributes;
-    const addedNote = await noteService.updateNote(Number(req.params.id), newNote);
+router.put('/:id', middleware.tokenExtractor, (async (req: AuthenticatedRequest, res) => {
+    const validUser: NewNoteEntry = {
+        ...req.body as NewNoteEntry,
+        userId: req.user.id
+    };
+    const newNote = toNewNoteEntry(validUser) as NoteAttributes;
+    const addedNote = await noteService.updateNote(Number(req.params.id), newNote, Number(req.user.id));
     if (addedNote) res.json(addedNote);
     else throw Error('Bad data');
 }) as RequestHandler );
