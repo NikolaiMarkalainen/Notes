@@ -23,16 +23,15 @@ const createNotes = async (entry: NewNoteEntry): Promise<NewNoteEntry> => {
 const removeNote = async (id: number, userId: number): Promise<number> => {
     const originalNote = await Note.findByPk(id);
     if(!originalNote) throw Error('Note not found');
-    console.log(originalNote.userId, userId);
     if(originalNote.userId !== userId) throw Error('Missing user authorization');
     const deletedNote =  await Note.destroy({where: { id }});
     return deletedNote;
 };
 
-const updateNote = async (id: number, updateNote: NoteAttributes, userId: number): Promise<NoteAttributes | null> => {
+const updateNote = async (id: number, updateNote: NoteAttributes): Promise<NoteAttributes | null> => {
     const note = await Note.findByPk(id);
     if(!note) throw new Error('Not found');
-    if(note.userId !== userId) throw Error('Missing user authorization');
+    if(note.userId !== id) throw Error('Missing user authorization');
     await note.update(updateNote);
     return note;
 };

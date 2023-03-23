@@ -44,7 +44,7 @@ router.put('/:id', middleware.tokenExtractor, (async (req: AuthenticatedRequest,
         userId: req.user.id
     };
     const newNote = toNewNoteEntry(validUser) as NoteAttributes;
-    const addedNote = await noteService.updateNote(Number(req.params.id), newNote, Number(req.user.id));
+    const addedNote = await noteService.updateNote(Number(req.params.id), newNote);
     if (addedNote) res.json(addedNote);
     else throw Error('Bad data');
 }) as RequestHandler );

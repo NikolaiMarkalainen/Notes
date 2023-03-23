@@ -24,8 +24,12 @@ Team.hasMany(User, {
     onDelete: 'SET NULL'
 });
 // Team relation to the owner
-Team.hasOne(Owner);
-Owner.belongsTo(Team);
+Team.hasOne(Owner, {
+    onDelete: 'CASCADE'
+});
+Owner.belongsTo(Team, {
+    onDelete: 'CASCADE'
+});
 
 // Relationship between Note and the Team
 Note.belongsTo(Team);

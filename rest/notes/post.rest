@@ -1,6 +1,6 @@
 POST http://localhost:5000/api/notes/
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImpvaG5kb2VAZXhhbXBsZS5jb20iLCJpZCI6MSwiaWF0IjoxNjc5NDY2MzYxfQ.TBukE9lx556nWobF8SK-kNGlQK_rxFKA1rhOdcKBpfo
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImpvaG5kb2VAZXhhbXBsZS5jb20iLCJpZCI6MSwiaWF0IjoxNjc5NTU1Nzc5fQ.fiL1yoJK2ED9qiOymU3KEntR4kc9Q5RFiKAlU2vV9
 
 {
     "author": "testing@google.com",

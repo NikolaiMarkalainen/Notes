@@ -30,9 +30,9 @@ module.exports = {
     },
     down: async ({ context: queryInterface }: MigrationContext ) => {
         await queryInterface.bulkDelete('notes', {}, {});
+        await queryInterface.bulkDelete('sessions', {}, {});
+        await queryInterface.bulkDelete('owners', {}, {});
         await queryInterface.bulkDelete('users', {}, {});
         await queryInterface.bulkDelete('teams', {}, {});
-        await queryInterface.bulkDelete('owners', {}, {});
-
       }
 };

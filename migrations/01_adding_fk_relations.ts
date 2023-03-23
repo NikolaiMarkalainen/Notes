@@ -32,6 +32,7 @@ module.exports = {
         await queryInterface.addColumn('owners', 'user_id', {
             type: DataTypes.INTEGER,
             allowNull: false,
+            onDelete: 'CASCADE',
             references:{ 
                 model: 'users',
                 key: 'id',
@@ -40,6 +41,7 @@ module.exports = {
         await queryInterface.addColumn('owners', 'team_id', {
             type: DataTypes.INTEGER,
             allowNull: false,
+            onDelete: 'CASCADE',
             references:{ 
                 model: 'teams',
                 key: 'id',
@@ -47,7 +49,6 @@ module.exports = {
         });
     },
     down: async ({context: queryInterface} : MigrationContext) => {
-        await queryInterface.removeColumn('teams','owner');
         await queryInterface.removeColumn('users', 'team_id');
         await queryInterface.removeColumn('notes', 'user_id');
         await queryInterface.removeColumn('notes', 'team_id');

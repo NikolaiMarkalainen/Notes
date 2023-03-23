@@ -3,6 +3,7 @@ import userService from '../services/userService';
 import { RequestHandler } from "express";
 import {toNewUserEntry, updateUserEntry} from "../utils/userUtils";
 import { UserAttributes } from "../types";
+import middleware from "../utils/middleware";
 const router = express.Router();
 // async has to be labeled as RequestHandler to function properly in requests
 
@@ -31,14 +32,14 @@ router.post('/', (async (req, res) => {
 }) as RequestHandler);
 
 
-router.delete('/:id', (async (req, _res) => {
+router.delete('/:id', middleware.tokenExtractor, (async (req, _res) => {
     const deleted = await userService.removeUser(Number(req.params.id));
     if(deleted) throw Error('Deleted');
     else throw Error('Not found');
 }) as RequestHandler);
 
 
-router.put('/:id', (async (req, res) => {
+router.put('/:id', middleware.tokenExtractor, (async (req, res) => {
     const newUser = updateUserEntry(req.body) as UserAttributes;
     const addedUser = await userService.updateUser(Number(req.params.id), newUser);
     if(addedUser) res.json(addedUser);

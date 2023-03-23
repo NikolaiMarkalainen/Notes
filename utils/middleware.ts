@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response } from "express";
 import config from './config';
-import { User, Session } from "../models/index";
+import { User, Session, Owner } from "../models/index";
 import { AuthenticatedRequest } from "../types";
 import jwt from "jsonwebtoken";
 
@@ -30,6 +30,18 @@ const tokenExtractor = async (req: AuthenticatedRequest, _res: Response, next: N
     next();
 };
 
+const isOwner = async (req: AuthenticatedRequest, _res: Response, next: NextFunction) => {
+        // authenticatedrequest having user field already now we check whether there is a valid owner
+        // found behind userid 
+        const owner = await Owner.findOne({where: {userId: req.user.id, teamId: req.params.id}});
+        //condition met sending in next function to continue code
+        if(owner) next();
+        else throw Error('Missing user authorization');
+}; 
+
+/*const isAdmin = async(req,res,next) => {
+
+};*/
 
 const errorHandler = (error: Error, _req: Request, res: Response, _next: NextFunction) => {
     console.log('IN ERROR HANDLER');
@@ -109,5 +121,6 @@ const errorHandler = (error: Error, _req: Request, res: Response, _next: NextFun
 
 export default {
     errorHandler,
-    tokenExtractor
+    tokenExtractor,
+    isOwner
 };
