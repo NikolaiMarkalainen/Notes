@@ -1,6 +1,6 @@
-#### Note Application 
+<h4>Note Application </h4>
 <br>
-##### Note application created with so far
+<h5> Note application created with so far</h5>
 <li>Typescript
 <li>Docker
 <li>Postgre SQL
