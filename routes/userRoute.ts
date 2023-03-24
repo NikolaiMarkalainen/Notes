@@ -9,8 +9,10 @@ const router = express.Router();
 
 
 
-router.get('/', (async (_req, res) => {
-    const users = await userService.getUsers();
+router.get('/', (async (req, res) => {
+    //http://localhost:5000/api/users?search=john
+    const searchQuery = typeof req.query.search === 'string' ? req.query.search : '';
+    const users = await userService.getUsers(searchQuery);
     if(users) res.send(users); 
     else throw Error('Not found');
 }) as RequestHandler);
