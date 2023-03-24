@@ -21,7 +21,8 @@
 <img src= "/images/Screenshot from 2023-03-23 12-14-22.png">
 <h5> Components and their routes</h5>
 <img src = "images/Screenshot from 2023-03-23 12-27-08.png">
-
-
+<h5> ER graph thus far</h5>
+<img src="images/Screenshot from 2023-03-24 09-06-46.png">
 ##### For planning used 
 <li> excalidraw.com
+<li> draw.io
