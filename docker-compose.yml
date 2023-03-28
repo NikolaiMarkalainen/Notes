@@ -26,8 +26,6 @@ services:
       - ${PORT}:${PORT}
     depends_on:
       - db
-    volumes:
-    - .:/usr/src/app
   db:
     image: postgres:latest
     container_name: db
