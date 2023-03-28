@@ -1,0 +1,53 @@
+{
+  "name": "lopputyo",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "ts-node": "ts-node",
+    "start": "ts-node index.ts",
+    "dev": "ts-node-dev index.ts",
+    "build": "tsc",
+    "lint": "eslint --ext .ts .",
+    "migration:down": "ts-node src/utils/rollMigrations.ts",
+    "migration:up": "ts-node --transpile-only src/utils/runMigrations.ts"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/bcrypt": "^5.0.0",
+    "@types/cors": "^2.8.13",
+    "@types/express": "^4.17.17",
+    "@types/node": "^18.15.3",
+    "@types/pg": "^8.6.6",
+    "@types/sequelize": "^4.28.14",
+    "@types/validator": "^13.7.13",
+    "@typescript-eslint/eslint-plugin": "^5.55.0",
+    "@typescript-eslint/parser": "^5.55.0",
+    "eslint": "^8.36.0",
+    "esm": "^3.2.25",
+    "pg": "^8.10.0",
+    "pg-hstore": "^2.3.4",
+    "sequelize": "^6.29.2",
+    "sequelize-cli": "^6.6.0",
+    "sequelize-typescript": "^2.1.5",
+    "ts-node": "^10.9.1",
+    "ts-node-dev": "^2.0.0",
+    "typescript": "^4.9.5"
+  },
+  "dependencies": {
+    "@types/jsonwebtoken": "^9.0.1",
+    "bcrypt": "^5.1.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "express-async-error": "^0.0.2",
+    "express-async-errors": "^3.1.1",
+    "jsonwebtoken": "^9.0.0",
+    "nodemon": "^2.0.21",
+    "reflect-metadata": "^0.1.13",
+    "router": "^1.3.8",
+    "umzug": "^3.2.1"
+  }
+}

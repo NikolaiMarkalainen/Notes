@@ -1,14 +1,27 @@
 version: '3'
 
 services:
+  frontend:
+    container_name: frontend
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    volumes:
+      - ./frontend:/usr/src/app
+    ports: 
+      - 5173:5173
   api:
     container_name: api
-    build: .
+    build: 
+      context: ./backend
+      dockerfile: Dockerfile
     environment:
       POSTGRES_USER: ${DB_USER}
       POSTGRES_PASSWORD: ${DB_PASSWORD}
       POSTGRES_DB: ${DB_NAME}
       POSTGRES_HOST: ${DB_HOST}
+    volumes:
+      - ./backend:/usr/src/app
     ports:
       - ${PORT}:${PORT}
     depends_on:
@@ -25,7 +38,7 @@ services:
     ports:
       - '${DB_PORT}:${DB_PORT}'
     volumes:
-      - data:/data/db
+      - ./backend/data:/data/db
   nginx:
     image: nginx:1.20.1
     volumes:
@@ -35,5 +48,6 @@ services:
     container_name: reverse-proxy
     depends_on:
       - api
+      - frontend
 volumes:
   data: {}

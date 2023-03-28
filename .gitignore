@@ -1,4 +1,5 @@
 .env
-dist
-node_modules
-db.test.sql
+backend/dist
+backend/db.test.sql
+backend/node_modules/
+frontend/node_modules/

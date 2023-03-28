@@ -1,0 +1,1 @@
+{"version":3,"file":"rollMigrations.js","sourceRoot":"","sources":["../../utils/rollMigrations.ts"],"names":[],"mappings":";;;;;;;;;AAAA,OAAO,EAAE,iBAAiB,EAAE,MAAM,MAAM,CAAC;AAGzC,MAAM,eAAe,GAAG,GAAS,EAAE;IAC/B,MAAM,iBAAiB,EAAE,CAAC;AAC9B,CAAC,CAAA,CAAC;AAEF,eAAe,EAAE,CAAC,KAAK,CAAC,CAAC,KAAK,EAAE,EAAE,CAAC,OAAO,CAAC,KAAK,CAAC,KAAK,CAAC,CAAC,CAAC"}
