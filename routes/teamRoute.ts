@@ -3,13 +3,13 @@ import teamService from '../services/teamService';
 import { RequestHandler } from "express";
 import toNewTeamEntry from "../utils/teamUtils";
 import { AuthenticatedRequest, SearchRequest, TeamAttributes } from "../types";
-import middleware from "../utils/middleware";
+import  {searchMiddleware, tokenExtractor, isOwner}from "../utils/middleware";
 
 const router = express.Router();
 
 // async has to be labeled as RequestHandler to function properly in requests
 
-router.get('/',middleware.searchMiddleware (['userId', 'name']), (async (req, res) => {
+router.get('/',searchMiddleware (['userId', 'name']), (async (req, res) => {
     const teams = await teamService.getTeams(req as SearchRequest );
     res.send(teams);
 }) as RequestHandler);
@@ -22,7 +22,7 @@ router.get('/:id', (async (req,res) => {
 
 }) as RequestHandler);
 
-router.post( '/', middleware.tokenExtractor,(async (req: AuthenticatedRequest ,res) => {
+router.post( '/', tokenExtractor,(async (req: AuthenticatedRequest ,res) => {
     const newTeam = toNewTeamEntry(req.body);
     const addedTeam = await teamService.createTeam(newTeam);
     if (addedTeam) res.json(addedTeam);
@@ -30,7 +30,7 @@ router.post( '/', middleware.tokenExtractor,(async (req: AuthenticatedRequest ,r
 }) as RequestHandler);
 
 
-router.delete('/:id', middleware.tokenExtractor, middleware.isOwner, (async (req : AuthenticatedRequest, _res) => {
+router.delete('/:id', tokenExtractor, isOwner, (async (req : AuthenticatedRequest, _res) => {
     const deleted = await teamService.removeTeam(Number(req.params.id));
     if(deleted) throw Error('Deleted');
     else throw Error('Not found');
@@ -38,7 +38,7 @@ router.delete('/:id', middleware.tokenExtractor, middleware.isOwner, (async (req
 }) as RequestHandler);
 
 
-router.put('/:id', middleware.tokenExtractor, middleware.isOwner, (async (req : AuthenticatedRequest, res) => {
+router.put('/:id', tokenExtractor, isOwner, (async (req : AuthenticatedRequest, res) => {
     const newTeam = toNewTeamEntry(req.body) as TeamAttributes;
     const addedTeam = await teamService.updateTeam(Number(req.params.id), newTeam);
     if (addedTeam) res.json(addedTeam);

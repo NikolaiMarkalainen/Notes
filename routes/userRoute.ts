@@ -3,13 +3,13 @@ import userService from '../services/userService';
 import { RequestHandler } from "express";
 import {toNewUserEntry, updateUserEntry} from "../utils/userUtils";
 import { SearchRequest, UserAttributes} from "../types";
-import middleware from "../utils/middleware";
+import  {searchMiddleware, tokenExtractor}from "../utils/middleware";
 const router = express.Router();
 // async has to be labeled as RequestHandler to function properly in requests
 
 
 
-router.get('/', middleware.searchMiddleware (['name','username','teamId','admin']), (async (req, res) => {
+router.get('/', searchMiddleware (['name','username','teamId','admin']), (async (req, res) => {
     //http://localhost:5000/api/users?search=john
     const users = await userService.getUsers(req as SearchRequest);
     if(users) res.send(users); 
@@ -23,7 +23,7 @@ router.get('/:id', (async (req,res) => {
     else throw Error('Not found'); 
 }) as RequestHandler );
 
-router.post('/', middleware.tokenExtractor, (async (req, res) => {
+router.post('/', tokenExtractor, (async (req, res) => {
     const newUser = toNewUserEntry(req.body);
     console.log(newUser);
     const addedUser = await userService.createUser(newUser);
@@ -33,14 +33,14 @@ router.post('/', middleware.tokenExtractor, (async (req, res) => {
 }) as RequestHandler);
 
 
-router.delete('/:id', middleware.tokenExtractor, (async (req, _res) => {
+router.delete('/:id', tokenExtractor, (async (req, _res) => {
     const deleted = await userService.removeUser(Number(req.params.id));
     if(deleted) throw Error('Deleted');
     else throw Error('Not found');
 }) as RequestHandler);
 
 
-router.put('/:id', middleware.tokenExtractor, (async (req, res) => {
+router.put('/:id', tokenExtractor, (async (req, res) => {
     const newUser = updateUserEntry(req.body) as UserAttributes;
     const addedUser = await userService.updateUser(Number(req.params.id), newUser);
     if(addedUser) res.json(addedUser);

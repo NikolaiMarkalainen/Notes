@@ -5,7 +5,7 @@ import { AuthenticatedRequest, SearchParams, SearchRequest } from "../types";
 import jwt from "jsonwebtoken";
 import { Op } from "sequelize";
 
-const tokenExtractor = async (req: AuthenticatedRequest, _res: Response, next: NextFunction) => {
+export const tokenExtractor = async (req: AuthenticatedRequest, _res: Response, next: NextFunction) => {
     const authorization = req.get('authorization');
     if(authorization && authorization.toLowerCase().startsWith('bearer ')){
         const token = authorization.substring(7);
@@ -31,7 +31,7 @@ const tokenExtractor = async (req: AuthenticatedRequest, _res: Response, next: N
     next();
 };
 
-const isOwner = async (req: AuthenticatedRequest, _res: Response, next: NextFunction) => {
+export const isOwner = async (req: AuthenticatedRequest, _res: Response, next: NextFunction) => {
         // authenticatedrequest having user field already now we check whether there is a valid owner
         // found behind userid 
         const owner = await Owner.findOne({where: {userId: req.user.id, teamId: req.params.id}});
@@ -57,7 +57,7 @@ const buildWhereQuery = (params: SearchParams ) : object => {
     return where;
 };
 
-const searchMiddleware = (queryParams: string[]): RequestHandler => {
+export const searchMiddleware = (queryParams: string[]): RequestHandler => {
     return (req: SearchRequest, _res:Response, next: NextFunction) => {
         const searchParams : SearchParams = {};
         queryParams.forEach((param) =>{
@@ -79,15 +79,8 @@ const searchMiddleware = (queryParams: string[]): RequestHandler => {
 
 };*/
 
-/*
-const isSearch = async(req, res, next) => {
-    const search = req.query.search;
-    const parameter = req.query.search.?;
-    await user.findBy({where: {parameter }})
-}
 
-*/
-const errorHandler = (error: Error, _req: Request, res: Response, _next: NextFunction) => {
+export const errorHandler = (error: Error, _req: Request, res: Response, _next: NextFunction) => {
     console.log('IN ERROR HANDLER');
     console.log(error);
     console.log(error.message);
@@ -161,11 +154,3 @@ const errorHandler = (error: Error, _req: Request, res: Response, _next: NextFun
     }
 };
 
-
-
-export default {
-    errorHandler,
-    tokenExtractor,
-    isOwner,
-    searchMiddleware
-};
