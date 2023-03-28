@@ -1,10 +1,13 @@
 
 import { Team, User, Note } from "../models/index";
-import { NewTeamEntry, TeamAttributes } from "../types";
+import { NewTeamEntry, SearchRequest, TeamAttributes, TeamSearchParams } from "../types";
 
-const getTeams = async  (): Promise <TeamAttributes[]> => {
+const getTeams = async  (req : SearchRequest): Promise <TeamAttributes[]> => {
+    const where: TeamSearchParams= req.where || {};
     const teams = await Team.findAll({
+        where,
         include: {
+            
             model: User,
             attributes: ['name', 'username'],
             include:[
@@ -12,6 +15,7 @@ const getTeams = async  (): Promise <TeamAttributes[]> => {
                 model: Note,
                 attributes:['title','content'],
             },
+            
         ],
         },
     });

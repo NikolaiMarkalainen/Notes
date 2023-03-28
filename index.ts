@@ -18,7 +18,6 @@ app.use('/api/notes', NoteRouter);
 app.use('/api/teams', TeamRouter);
 app.use('/api/users', UserRouter);
 app.use('/api/login', LoginRouter);
-//app.use('/api/login', LoginRouter);
 app.use(Middleware.errorHandler);
 
 const start = async () => {

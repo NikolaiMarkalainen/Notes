@@ -2,17 +2,16 @@ import express from "express";
 import userService from '../services/userService';
 import { RequestHandler } from "express";
 import {toNewUserEntry, updateUserEntry} from "../utils/userUtils";
-import { UserAttributes } from "../types";
+import { SearchRequest, UserAttributes} from "../types";
 import middleware from "../utils/middleware";
 const router = express.Router();
 // async has to be labeled as RequestHandler to function properly in requests
 
 
 
-router.get('/', (async (req, res) => {
+router.get('/', middleware.searchMiddleware (['name','username','teamId','admin']), (async (req, res) => {
     //http://localhost:5000/api/users?search=john
-    const searchQuery = typeof req.query.search === 'string' ? req.query.search : '';
-    const users = await userService.getUsers(searchQuery);
+    const users = await userService.getUsers(req as SearchRequest);
     if(users) res.send(users); 
     else throw Error('Not found');
 }) as RequestHandler);
@@ -24,7 +23,7 @@ router.get('/:id', (async (req,res) => {
     else throw Error('Not found'); 
 }) as RequestHandler );
 
-router.post('/', (async (req, res) => {
+router.post('/', middleware.tokenExtractor, (async (req, res) => {
     const newUser = toNewUserEntry(req.body);
     console.log(newUser);
     const addedUser = await userService.createUser(newUser);

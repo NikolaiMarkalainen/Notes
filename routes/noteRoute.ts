@@ -2,15 +2,15 @@ import express from "express";
 import noteService from '../services/noteService';
 import { RequestHandler } from "express";
 import toNewNoteEntry from "../utils/noteUtils";
-import { NewNoteEntry, NoteAttributes } from "../types";
+import { NewNoteEntry, NoteAttributes, SearchRequest } from "../types";
 import middleware from "../utils/middleware";
 import { AuthenticatedRequest} from "../types";
 const router = express.Router();
 
 // async has to be labeled as RequestHandler to function properly in requests
 
-router.get('/', (async (_req, res) => {
-    const notes = await noteService.getNotes();
+router.get('/', middleware.searchMiddleware (['userId', 'teamId','author','content','title']), (async (req, res) => {
+    const notes = await noteService.getNotes(req as SearchRequest);
     if(notes)res.send(notes);
     else throw Error('Not found');
 }) as RequestHandler);

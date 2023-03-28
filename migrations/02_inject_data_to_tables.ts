@@ -4,7 +4,6 @@ module.exports = {
     // manually adding id's for comparison of different data displays
     
     up: async ({ context: queryInterface} : MigrationContext) => {
-        const hashedPassword = await bcrypt.hash('password', 10);
         await queryInterface.bulkInsert('teams', [
             { name: 'Team A', id: 1 },
             { name: 'Team B', id: 2 },
@@ -15,14 +14,14 @@ module.exports = {
             { name: 'Team G', id: 7 }
         ]);
         await queryInterface.bulkInsert('users', [
-            { name: 'John Doe', username: 'johndoe@example.com', password: hashedPassword, id:1, team_id:1, admin: true },
-            { name: 'Jane Smith', username: 'janesmith@example.com', password: hashedPassword, id:2, team_id:2, admin: false },
-            { name: 'Bob Johnson', username: 'bobjohnson@example.com', password: hashedPassword, id:3, team_id:3, admin: false },
-            { name: 'Alice Johnson', username: 'alicejohnson@example.com', password: hashedPassword, id: 4, team_id: 4, admin: false },
-            { name: 'Tom Brown', username: 'tombrown@example.com', password: hashedPassword, id: 5, team_id: 5, admin: false },
-            { name: 'Emily Davis', username: 'emilydavis@example.com', password: hashedPassword, id: 6, team_id: 6, admin: false },
-            { name: 'Michael Lee', username: 'michaellee@example.com', password: hashedPassword, id: 7, team_id: 7, admin: false },
-            { name: 'Lucy Kim', username: 'lucykim@example.com', password: hashedPassword, id: 8, team_id: 6, admin: false }
+            { name: 'John Doe', username: 'johndoe@example.com', password: await bcrypt.hash('password', 10), id:1, team_id:1, admin: true },
+            { name: 'Jane Smith', username: 'janesmith@example.com', password: await bcrypt.hash('password', 10), id:2, team_id:2, admin: false },
+            { name: 'Bob Johnson', username: 'bobjohnson@example.com', password: await bcrypt.hash('password', 10), id:3, team_id:3, admin: false },
+            { name: 'Alice Johnson', username: 'alicejohnson@example.com', password: await bcrypt.hash('password', 10), id: 4, team_id: 4, admin: false },
+            { name: 'Tom Brown', username: 'tombrown@example.com', password: await bcrypt.hash('password', 10), id: 5, team_id: 5, admin: false },
+            { name: 'Emily Davis', username: 'emilydavis@example.com', password: await bcrypt.hash('password', 10), id: 6, team_id: 6, admin: false },
+            { name: 'Michael Lee', username: 'michaellee@example.com', password: await bcrypt.hash('password', 10), id: 7, team_id: 7, admin: false },
+            { name: 'Lucy Kim', username: 'lucykim@example.com', password: await bcrypt.hash('password', 10), id: 8, team_id: 6, admin: false }
         ]);
         await queryInterface.bulkInsert('notes', [
             { title: 'First note', author: 'John Doe', content: 'This is my first note', user_id: 1, team_id: 1 },

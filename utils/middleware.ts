@@ -1,8 +1,9 @@
-import { NextFunction, Request, Response } from "express";
+import { NextFunction, Request, RequestHandler, Response } from "express";
 import config from './config';
 import { User, Session, Owner } from "../models/index";
-import { AuthenticatedRequest } from "../types";
+import { AuthenticatedRequest, SearchParams, SearchRequest } from "../types";
 import jwt from "jsonwebtoken";
+import { Op } from "sequelize";
 
 const tokenExtractor = async (req: AuthenticatedRequest, _res: Response, next: NextFunction) => {
     const authorization = req.get('authorization');
@@ -39,10 +40,53 @@ const isOwner = async (req: AuthenticatedRequest, _res: Response, next: NextFunc
         else throw Error('Missing user authorization');
 }; 
 
-/*const isAdmin = async(req,res,next) => {
+const buildWhereQuery = (params: SearchParams ) : object => {
+    const where: {[key: string]: unknown} = {};
+        Object.keys(params).forEach((key: string) => {
+        const value = params[key];
+        // checking conditions whether true false or numeric number
+        const convertedValue = Number(value);
+        if (!isNaN(convertedValue)) {
+          where[key] = { [Op.eq]: convertedValue };
+        } else if (value === 'true' || value === 'false') {
+          where[key] = { [Op.eq]: value };
+        } else {
+          where[key] = { [Op.iLike]: `%${value}%` };
+        }
+    });
+    return where;
+};
+
+const searchMiddleware = (queryParams: string[]): RequestHandler => {
+    return (req: SearchRequest, _res:Response, next: NextFunction) => {
+        const searchParams : SearchParams = {};
+        queryParams.forEach((param) =>{
+            const value = req.query[param];
+            if(typeof value === 'string' || typeof value === 'number' || typeof value === 'boolean') {
+                searchParams[param] = value;
+            }
+        });
+        req.where= buildWhereQuery(searchParams);
+        next();
+    };
+};
+
+
+/*const isAdmin = async(req, res, next) => {
+    const user = await User.findByPK(req.user.id);
+    if(user) next();
+    else throw Error('Missing user authorization');
 
 };*/
 
+/*
+const isSearch = async(req, res, next) => {
+    const search = req.query.search;
+    const parameter = req.query.search.?;
+    await user.findBy({where: {parameter }})
+}
+
+*/
 const errorHandler = (error: Error, _req: Request, res: Response, _next: NextFunction) => {
     console.log('IN ERROR HANDLER');
     console.log(error);
@@ -79,8 +123,8 @@ const errorHandler = (error: Error, _req: Request, res: Response, _next: NextFun
         case 'Incorrect or missing author':
             return res.status(400).send({ message: 'Please enter valid author.'});
 
-        case 'Missing user authorization':
-            return res.status(401).send({ message: 'User is not authorized to perform this action.'});
+        case 'Missing user authorization':  
+            return res.status(404).send({ message: 'User is not authorized to perform this action.'});
 
         case 'Incorrect or missing title':
             return res.status(400).send({ message: 'Please enter a valid title.'});
@@ -92,7 +136,7 @@ const errorHandler = (error: Error, _req: Request, res: Response, _next: NextFun
             return res.status(200).send({ message: 'Deleted successfully.'});
 
         case 'Invalid session':
-            return res.status(401).send({ message: 'Invalid session'});
+            return res.status(404).send({ message: 'Invalid session'});
 
         case 'Missing token':
             return res.status(400).send({ message: 'Token missing from request'});
@@ -122,5 +166,6 @@ const errorHandler = (error: Error, _req: Request, res: Response, _next: NextFun
 export default {
     errorHandler,
     tokenExtractor,
-    isOwner
+    isOwner,
+    searchMiddleware
 };

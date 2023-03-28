@@ -93,3 +93,30 @@ export type OwnerAttributes = {
     userId: number,
     teamId: number
 };
+
+export type UserSearchParams = {
+    name?: string,
+    username?: string,
+    admin?: boolean,
+    teamId?: number | null
+};
+
+export type NoteSearchParams ={
+    userId?: number, 
+    teamId?: number,
+    author?: string,
+    content?: string,
+    title?: string
+};
+
+export type TeamSearchParams = {
+    name?: string
+};
+
+export interface SearchRequest extends Request {
+    where: object
+}
+
+export type SearchParams = {
+    [key: string]: string | number | boolean
+};

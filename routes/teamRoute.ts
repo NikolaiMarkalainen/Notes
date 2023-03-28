@@ -2,14 +2,15 @@ import express from "express";
 import teamService from '../services/teamService';
 import { RequestHandler } from "express";
 import toNewTeamEntry from "../utils/teamUtils";
-import { AuthenticatedRequest, TeamAttributes } from "../types";
+import { AuthenticatedRequest, SearchRequest, TeamAttributes } from "../types";
 import middleware from "../utils/middleware";
+
 const router = express.Router();
 
 // async has to be labeled as RequestHandler to function properly in requests
 
-router.get('/', (async (_req, res) => {
-    const teams = await teamService.getTeams();
+router.get('/',middleware.searchMiddleware (['userId', 'name']), (async (req, res) => {
+    const teams = await teamService.getTeams(req as SearchRequest );
     res.send(teams);
 }) as RequestHandler);
 

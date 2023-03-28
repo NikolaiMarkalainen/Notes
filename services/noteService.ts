@@ -1,9 +1,10 @@
 
 import { Note } from "../models/index";
-import { NewNoteEntry, NoteAttributes } from "../types";
+import { NewNoteEntry, NoteAttributes, SearchRequest, NoteSearchParams } from "../types";
 
-const getNotes = async  (): Promise <NoteAttributes[]> => {
-    const notes = await Note.findAll();
+const getNotes = async  (req : SearchRequest): Promise <NoteAttributes[]> => {
+    const where: NoteSearchParams= req.where || {};
+    const notes = await Note.findAll({where});
     console.log(notes.map((note) => note.toJSON()));
     return notes.map((note) => note.toJSON());
 };

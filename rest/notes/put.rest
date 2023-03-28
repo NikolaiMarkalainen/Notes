@@ -1,6 +1,6 @@
 PUT http://localhost:5000/api/notes/1
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImpvaG5kb2VAZXhhbXBsZS5jb20iLCJpZCI6MSwiaWF0IjoxNjc5NjQ5MTA5fQ.jVyp0boeHE00NzTlPRT00YfOMWPiRXCquKZf-xfnAqE
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImpvaG5kb2VAZXhhbXBsZS5jb20iLCJpZCI6MSwiaWF0IjoxNjc5OTc5MDMyfQ.V8zSi8RnRTEmZvrM8x_1FCcGZT7N_KTLbP904aDVZQo
 
 {
     "author": "testing@google.com",

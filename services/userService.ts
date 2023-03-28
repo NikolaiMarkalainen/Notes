@@ -1,19 +1,10 @@
 
 import { User } from "../models/index";
-import { NewUserEntry, UserAttributes } from "../types";
-import { Op } from "sequelize";
-const getUsers = async  (query: string): Promise <UserAttributes[]> => {
-    let where = {};
-    if(query){
-        where = {
-            [Op.or]: [
-                {name: {[ Op.substring ]: query} },
-                {username: {[ Op.substring ]: query}}
-            ]
-        };
-    }
+import { NewUserEntry, SearchRequest, UserAttributes, UserSearchParams } from "../types";
+
+const getUsers = async  (req: SearchRequest ): Promise <UserAttributes[]> => {
+    const where: UserSearchParams= req.where || {};
     const users = await User.findAll({where});
-    
     return users;
 };
 
