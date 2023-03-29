@@ -17,6 +17,19 @@ export type PostUser = {
     admin?: boolean
 }
 
+export type PostNote = {
+    content: string,
+    title: string,
+    author: string,
+    id: number,
+    teamId: number | null,
+    userId: number
+}
+
+export type PostTeam = {
+    name: string
+}
+
 export type TeamSchema ={
     name: string,
     id: number
@@ -28,5 +41,5 @@ export type NoteSchema = {
     content: string,
     id: number,
     userId: number,
-    teamId: number
+    teamId: number | null
 }

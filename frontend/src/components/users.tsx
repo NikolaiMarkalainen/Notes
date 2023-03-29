@@ -1,7 +1,8 @@
-import { useAppSelector } from "../../hooks";
+import { useAppSelector } from "../hooks";
 export const User = () => {
     
     const users = useAppSelector(state => state.users.users);
+    console.log(users);
     return(
         <div>
         {users.map(user => (

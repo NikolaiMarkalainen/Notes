@@ -1,18 +1,9 @@
-import { useEffect,useState } from "react";
-import { AllNotes } from "../../services/noteService";
-import { NoteSchema } from "../../types";
+import { useAppSelector } from "../hooks";
+
 export const Note = () => {
-    const [notes, setNotes] = useState<NoteSchema[]>([]);
 
-    useEffect(() => {
-    async function fetchData(){
-        const data = await AllNotes();
-        setNotes(data); 
-    }
-    fetchData();
-    }, []);
+    const notes = useAppSelector(state => state.notes.notes);
     console.log(notes);
-
     return(
         <div>
         {notes.map(note => (
