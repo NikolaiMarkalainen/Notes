@@ -120,3 +120,8 @@ export interface SearchRequest extends Request {
 export type SearchParams = {
     [key: string]: string | number | boolean
 };
+
+export type UserPagination = {
+    users: UserAttributes[],
+    pages: number
+}

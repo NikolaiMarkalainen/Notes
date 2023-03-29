@@ -1,6 +1,6 @@
 
 import { User } from "../models/index";
-import { NewUserEntry, SearchRequest, UserAttributes, UserSearchParams } from "../types";
+import { NewUserEntry, SearchRequest, UserAttributes, UserPagination, UserSearchParams } from "../types";
 
 const getUsers = async  (req: SearchRequest ): Promise <UserAttributes[]> => {
     const where: UserSearchParams= req.where || {};
@@ -8,6 +8,23 @@ const getUsers = async  (req: SearchRequest ): Promise <UserAttributes[]> => {
     return users;
 };
 
+const getPaginatedUsers = async( page : number ): Promise<UserPagination> =>  {
+    
+    try{
+        const LIMIT = 3;
+        const OFFSET = (Number(page)- 1) * LIMIT;        
+        const amount = await User.count();
+        const users = await User.findAll({
+            limit: LIMIT,
+            offset: OFFSET,
+        });
+        const pages = Math.ceil(amount / LIMIT);
+        return {users, pages};
+    } catch(error){
+        console.error(error);
+        throw new Error('Failed to fetch paginated users');
+    }
+}
 const findById = async (id: number): Promise<UserAttributes> => {
     const user = await User.findByPk(id);
     if(user) return user;
@@ -38,5 +55,5 @@ const updateUser = async (id: number, updateUser: UserAttributes): Promise<UserA
 };
 
  export default {
-    createUser, findById, getUsers, removeUser, updateUser
+    createUser, findById, getUsers, removeUser, updateUser, getPaginatedUsers
 };

@@ -4,6 +4,8 @@ import { useAppDispatch } from './hooks';
 import { Route, Routes,Link } from 'react-router-dom';
 import {Team, User,Note, Home} from "./components"
 import { fetchUsers, AppDispatch, fetchNotes, fetchTeams } from './state';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import "./styles.css"
 const App = () => {
   
   const dispatch: AppDispatch = useAppDispatch();
@@ -18,11 +20,13 @@ const App = () => {
 
   
   return (
-    <div>
-      <Link to="/">Home</Link>
-      <Link to="/users">Users</Link>
-      <Link to="/teams">Teams</Link>
-      <Link to="/notes">Notes</Link>
+    <div className='background-body'>
+      <div className='Link-parent'>
+        <Link className='link-dark'to="/">Home</Link>
+        <Link className='link-dark'to="/users">Users</Link>
+        <Link className='link-dark'to="/teams">Teams</Link>
+        <Link className='link-dark'to="/notes">Notes</Link>
+      </div>
       <Routes>
         <Route index element={<Home/>}/>
         <Route path="/users" element={<User/>}></Route>
@@ -30,6 +34,7 @@ const App = () => {
         <Route path="/notes" element={<Note/>}></Route>
       </Routes>
     </div>
+
   )
 
 }

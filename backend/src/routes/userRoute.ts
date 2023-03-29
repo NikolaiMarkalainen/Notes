@@ -23,6 +23,12 @@ router.get('/:id', (async (req,res) => {
     else throw Error('Not found'); 
 }) as RequestHandler );
 
+router.get('/pagination/:page', (async (req, res) => {
+    const users = await userService.getPaginatedUsers(Number(req.params.page));
+    if(users) res.send(users);
+    else throw Error('Not found');
+})  as RequestHandler)
+
 router.post('/', tokenExtractor, (async (req, res) => {
     const newUser = toNewUserEntry(req.body);
     console.log(newUser);
