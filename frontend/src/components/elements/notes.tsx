@@ -1,6 +1,6 @@
 import { useEffect,useState } from "react";
-import { AllNotes } from "../services/noteService";
-import { NoteSchema } from "../types";
+import { AllNotes } from "../../services/noteService";
+import { NoteSchema } from "../../types";
 export const Note = () => {
     const [notes, setNotes] = useState<NoteSchema[]>([]);
 

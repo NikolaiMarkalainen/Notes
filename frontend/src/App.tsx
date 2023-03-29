@@ -1,10 +1,19 @@
 
+import { useEffect } from 'react';
+import { useAppDispatch, useAppSelector } from './hooks';
 import { Route, Routes,Link } from 'react-router-dom';
-import { Team } from './components/teams';
-import { Note } from './components/notes';
-import { User } from './components/users';
-import { Home } from './components/home';
+import {Team, User,Note, Home} from "./components"
+import { fetchUsers, AppDispatch } from './state';
 const App = () => {
+  
+  const dispatch: AppDispatch = useAppDispatch();
+  
+  const users = useAppSelector(state => state.users);
+  useEffect(() => {
+    dispatch(fetchUsers())
+  }, [dispatch]);
+  console.log(users);
+
   return (
     <div>
       <Link to="/">Home</Link>

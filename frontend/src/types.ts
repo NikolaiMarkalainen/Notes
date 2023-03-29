@@ -3,11 +3,19 @@ import { PathRouteProps } from "react-router-dom";
 export type UserSchema = {
     name: string,
     username: string,
+    password: string,
     admin: boolean,
     id: number,
-    teamId: number,
-    userId: number
+    teamId: number | null,
 };
+
+export type PostUser = {
+    name: string,
+    username: string,
+    password: string,
+    teamId?: number | null,
+    admin?: boolean
+}
 
 export type TeamSchema ={
     name: string,

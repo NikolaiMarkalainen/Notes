@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import { AllTeams } from "../services/teamService";
-import { TeamSchema } from "../types";
+import { AllTeams } from "../../services/teamService";
+import { TeamSchema } from "../../types";
 export const Team = () => {
 
     const [teams, setTeams] = useState<TeamSchema[]>([]);
