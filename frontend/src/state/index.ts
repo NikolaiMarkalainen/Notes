@@ -1,5 +1,5 @@
-export * from "./reducers/reducerTypes"
 export * from "./reducers/userReducer"
 export * from "./reducers/noteReducer"
 export * from "./reducers/teamReducer"
 export * from "./store"
+export * from "./services/apiService"

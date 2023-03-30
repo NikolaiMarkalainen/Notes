@@ -1,6 +1,7 @@
-import { PathRouteProps } from "react-router-dom";
 
-export type UserSchema = {
+export enum ActionType {ADD, DELETE, PUT, GET}
+
+export type User = {
     name: string,
     username: string,
     password: string,
@@ -30,12 +31,12 @@ export type PostTeam = {
     name: string
 }
 
-export type TeamSchema ={
+export type Team ={
     name: string,
     id: number
 }
 
-export type NoteSchema = {
+export type Note = {
     title: string,
     author: string,
     content: string,
@@ -44,8 +45,102 @@ export type NoteSchema = {
     teamId: number | null
 }
 
-export type UserPagination = {
-    user: UserSchema[],
-    page: number,
-    currentPage: number
+export type NotePagination = {
+    notes: Note[],
+    pages: number,
+    currentPage: number,
+    totalResults: number
 };
+
+export type UserCreation = {
+    name: string,
+    username: string,
+    password: string,
+    teamId?: number | null,
+    admin?: boolean
+};
+
+export type CreateNoteResponse = {
+    data: Note;
+}
+
+export type NoteCreation = {
+    title: string,
+    author: string,
+    content: string,
+    id: number,
+    userId: number,
+    teamId?: number
+};
+
+export type TeamCreation = {
+    name: string
+};
+
+export type UserState = {
+    users: User[],
+    status: status,
+    error: null,
+};
+
+export type ListResponse<T> = {
+    pages: number,
+    currentPage: number
+    data: T[]
+}
+
+export type NoteState = {
+    notes: Note[],
+    status: status,
+    error: null,
+};
+
+
+
+export type TeamState = {
+    teams: Team[],
+    status: status,
+    error: null
+};
+
+export type TeamPagination = {
+    teams: Team[],
+    pages: number,
+    currentPage: number,
+}
+
+export type CreateTeamResponse = {
+    notes: Note,
+    teams: Team,
+    users: User,
+}
+
+export type UserPagination = {
+    users: User[], 
+    pages: number,
+    currentPage: number,
+}
+
+export type CreateUserResponse = {
+    users: User
+}
+
+
+export enum status {
+    loading = 'loading',
+    idle = 'idle',
+    error = 'error',
+    fulfilled = 'fulfilled'
+};
+
+export type NotePaginationState ={
+    notes: Note[],
+    currentPage: number,
+    pages: number,
+    isLoading: boolean,
+    error: null
+}
+
+export type paginatonAction = {
+    page: number;
+}

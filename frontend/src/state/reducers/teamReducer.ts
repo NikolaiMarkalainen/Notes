@@ -1,6 +1,5 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { allTeams, saveTeam } from "../../services/teamService";
-import { status, TeamState, TeamCreation, Team } from "./reducerTypes";
+import { status, TeamState, TeamCreation, Team } from "../../types"
 
 
 const initialState: TeamState = {
@@ -9,15 +8,6 @@ const initialState: TeamState = {
     error: null
 };
 
-export const fetchTeams = createAsyncThunk('teams/fetch', async (thunkAPI) => {
-    const response = await allTeams();
-    return response;
-});
-
-export const saveNewTeams = createAsyncThunk('teams/save', async ( newTeam: Team, thunkApi ) => {
-    const response = await saveTeam(newTeam);
-    return response;
-})
 
 export const teamSlice = createSlice({
     name:'Teams',
@@ -31,14 +21,6 @@ export const teamSlice = createSlice({
             });
         },
     },
-    extraReducers:(builder) => {
-        builder.addCase(fetchTeams.fulfilled, (state, action) => {
-            state.teams = action.payload;
-        })
-        builder.addCase(saveNewTeams.fulfilled, (state, action) => {
-            state.teams.push(action.payload);
-        })
-    }
-})
+});
 
 export default teamSlice;

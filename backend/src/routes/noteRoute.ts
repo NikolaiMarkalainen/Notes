@@ -23,13 +23,6 @@ router.get('/pagination', (async (req: PaginationRequest, res) => {
     else throw Error('Not found');
 })  as RequestHandler);
 
-
-router.get('/:id', (async (req,res) => {
-    const note = await noteService.findById(Number(req.params.id));
-    if(note) res.send(note);
-    else throw Error('Not found');
-}) as RequestHandler );
-
 router.post('/', tokenExtractor, (async (req : AuthenticatedRequest, res) => {
     const validUser: NewNoteEntry = {
         ...req.body as NewNoteEntry,
@@ -40,6 +33,14 @@ router.post('/', tokenExtractor, (async (req : AuthenticatedRequest, res) => {
     if (addedNote) res.json(addedNote);
     else throw Error('Bad data');
 }) as RequestHandler);
+
+
+router.get('/:id', (async (req,res) => {
+    const note = await noteService.findById(Number(req.params.id));
+    if(note) res.send(note);
+    else throw Error('Not found');
+}) as RequestHandler );
+
 
 router.delete('/:id', tokenExtractor, (async (req: AuthenticatedRequest , _res) => {
     const deleted = await noteService.removeNote(Number(req.params.id), Number(req.user.id));
