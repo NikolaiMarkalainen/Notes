@@ -144,3 +144,25 @@ export type NotePaginationState ={
 export type paginatonAction = {
     page: number;
 }
+
+
+export type LoginParams = {
+    username: string,
+    password: string
+}
+
+export type LoginResponse = {
+    message: string,
+    error:{
+        data?:{
+            message: string
+        }
+    }
+}
+
+export type ErrorType = {
+    status: number,
+    data:{
+        message: string
+    }
+}

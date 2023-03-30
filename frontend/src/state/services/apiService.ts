@@ -1,5 +1,8 @@
 import {createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { CreateNoteResponse, NotePagination, NoteCreation, Note, UserCreation, UserPagination, CreateUserResponse, User, TeamCreation, TeamPagination, CreateTeamResponse, Team   } from "../../types";
+import { CreateNoteResponse, NotePagination, NoteCreation, Note, 
+    UserCreation, UserPagination, CreateUserResponse, User,
+    TeamCreation, TeamPagination, CreateTeamResponse, Team,
+    LoginParams, LoginResponse   } from "../../types";
 
 
 export const Api = createApi({
@@ -45,6 +48,13 @@ export const Api = createApi({
         getAllUsers: builder.query<User, void>({
             query:() => 'users',
         }),
+        loginUser: builder.mutation<LoginResponse, LoginParams>({
+            query: (login: LoginParams) => ({
+                url: 'login',
+                method: 'POST',
+                body: login,
+            })
+        })
     }),
 });
 
@@ -52,6 +62,7 @@ export const Api = createApi({
 export const {
     useGetPaginatedNotesQuery, useCreateNoteMutation, useGetAllNotesQuery,
     useGetPaginatedTeamsQuery, useCreateTeamMutation, useGetAllTeamsQuery,
-    useGetPaginatedUsersQuery, useCreateUserMutation, useGetAllUsersQuery 
+    useGetPaginatedUsersQuery, useCreateUserMutation, useGetAllUsersQuery,
+    useLoginUserMutation, 
 } = Api
 
