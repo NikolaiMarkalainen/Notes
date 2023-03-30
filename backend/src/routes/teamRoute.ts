@@ -2,7 +2,7 @@ import express from "express";
 import teamService from '../services/teamService';
 import { RequestHandler } from "express";
 import toNewTeamEntry from "../utils/teamUtils";
-import { AuthenticatedRequest, SearchRequest, TeamAttributes } from "../types";
+import { AuthenticatedRequest, SearchRequest, TeamAttributes, PaginationRequest } from "../types";
 import  {searchMiddleware, tokenExtractor, isOwner}from "../utils/middleware";
 
 const router = express.Router();
@@ -13,6 +13,14 @@ router.get('/',searchMiddleware (['userId', 'name']), (async (req, res) => {
     const teams = await teamService.getTeams(req as SearchRequest );
     res.send(teams);
 }) as RequestHandler);
+
+
+router.get('/pagination', (async (req: PaginationRequest, res) => {
+    const {page}  = req.query;
+    const teams = await teamService.getPaginatedTeams(Number(page));
+    if(teams) res.send(teams);
+    else throw Error('Not found');
+})  as RequestHandler);
 
 
 router.get('/:id', (async (req,res) => {

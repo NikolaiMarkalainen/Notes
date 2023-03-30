@@ -1,12 +1,13 @@
 import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
-import { allUsers, saveUser } from "../../services/userService";
-import { User, UserState, UserCreation, status } from "./reducerTypes";
+import { allUsers, getPaginatedUsers, saveUser } from "../../services/userService";
+import { User, UserState, UserCreation, status, ListResponse } from "./reducerTypes";
 
 const initialState: UserState = {
     users: [],
     status: status.idle,
-    error: null
+    error: null,
 };
+
 
 export const fetchUsers = createAsyncThunk('users/fetch', async (thunkAPI) => {
     const response = await allUsers();
@@ -15,6 +16,11 @@ export const fetchUsers = createAsyncThunk('users/fetch', async (thunkAPI) => {
 
 export const saveNewUser = createAsyncThunk('users/save', async ( newUser: User, thunkAPI ) => {
     const response = await saveUser(newUser);
+    return response;
+});
+
+export const paginatedUsers = createAsyncThunk('users/pagination', async(page: number,thunkApi) => {
+    const response = await getPaginatedUsers(page);
     return response;
 });
 
@@ -33,6 +39,7 @@ export const userSlice = createSlice({
                     id: state.users.length + 1,
                 });
             },
+        
     },
     extraReducers:(builder) => {
         builder.addCase(fetchUsers.fulfilled, (state, action) => {
@@ -40,6 +47,9 @@ export const userSlice = createSlice({
         })
         builder.addCase(saveNewUser.fulfilled, (state, action) => {
             state.users.push(action.payload);
+        })
+        builder.addCase(paginatedUsers.fulfilled, (state, action) => {
+            state.users = action.payload;
         })
     }
 })

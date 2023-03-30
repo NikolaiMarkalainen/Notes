@@ -1,6 +1,6 @@
 
 import { Team, User, Note } from "../models/index";
-import { NewTeamEntry, SearchRequest, TeamAttributes, TeamSearchParams } from "../types";
+import { NewTeamEntry, SearchRequest, TeamAttributes, TeamSearchParams, TeamPagination } from "../types";
 
 const getTeams = async  (req : SearchRequest): Promise <TeamAttributes[]> => {
     const where: TeamSearchParams= req.where || {};
@@ -21,6 +21,23 @@ const getTeams = async  (req : SearchRequest): Promise <TeamAttributes[]> => {
     });
     return teams;
 };
+
+const getPaginatedTeams = async( page : number ): Promise<TeamPagination> =>  {
+    try{
+        const LIMIT = 3;
+        const OFFSET = (Number(page)- 1) * LIMIT;        
+        const amount = await Team.count();
+        const teams = await Team.findAll({
+            limit: LIMIT,
+            offset: OFFSET,
+        });
+        const pages = Math.ceil(amount / LIMIT);
+        return {teams, pages, currentPage: page, totalResults: amount};
+    } catch(error){
+        throw new Error('Failed to fetch pagination');
+    }
+};
+
 
 const findById = async (id: number): Promise<TeamAttributes | null> => {
     const team = await Team.findByPk(id);
@@ -48,6 +65,6 @@ const updateTeam = async (id: number, updateTeam: TeamAttributes): Promise <Team
 };
 
  export default {
-    createTeam, findById, getTeams, removeTeam, updateTeam
+    createTeam, findById, getTeams, removeTeam, updateTeam, getPaginatedTeams
 };
 

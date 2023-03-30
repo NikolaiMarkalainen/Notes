@@ -149,6 +149,12 @@ export const errorHandler = (error: Error, _req: Request, res: Response, _next: 
         case 'Note not found':
             return res.status(404).send({ message: 'Note not found'});
 
+        case 'Failed to fetch pagination':
+            return res.status(404).send({ message: 'Pagination not functioning'});
+
+        case 'Invalid page number':
+            return res.status(404).send({ message: 'Page number does not exsist'});
+            
         default:
             return res.status(500).send({ message: 'Something went wrong'});
     }

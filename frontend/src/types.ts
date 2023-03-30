@@ -43,3 +43,9 @@ export type NoteSchema = {
     userId: number,
     teamId: number | null
 }
+
+export type UserPagination = {
+    user: UserSchema[],
+    page: number,
+    currentPage: number
+};

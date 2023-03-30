@@ -9,22 +9,23 @@ const getUsers = async  (req: SearchRequest ): Promise <UserAttributes[]> => {
 };
 
 const getPaginatedUsers = async( page : number ): Promise<UserPagination> =>  {
-    
     try{
+        console.log("PAGE NUMBER",page);
         const LIMIT = 3;
         const OFFSET = (Number(page)- 1) * LIMIT;        
         const amount = await User.count();
+        if(!amount) throw Error('Not found');
         const users = await User.findAll({
             limit: LIMIT,
             offset: OFFSET,
         });
         const pages = Math.ceil(amount / LIMIT);
-        return {users, pages};
+        return {users, pages, currentPage: page, totalResults: amount};
     } catch(error){
-        console.error(error);
-        throw new Error('Failed to fetch paginated users');
+        throw new Error('Failed to fetch pagination');
     }
-}
+};
+
 const findById = async (id: number): Promise<UserAttributes> => {
     const user = await User.findByPk(id);
     if(user) return user;

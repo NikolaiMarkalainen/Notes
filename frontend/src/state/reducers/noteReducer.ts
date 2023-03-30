@@ -9,7 +9,7 @@ const initialState: NoteState = {
     error: null
 };
 
-export const fetchNotes = createAsyncThunk('notes/fetch', async (page: number ,thunkAPI) => {
+export const fetchNotes = createAsyncThunk('notes/fetch', async (thunkAPI) => {
     const response = await allNotes();
     return response;
 });

@@ -1,7 +1,5 @@
 import { useAppSelector } from "../hooks";
 import "../styles.css"
-import InfiniteScroll from 'react-infinite-scroll-component';
-import { fetchNotes } from "../state";
 
 export const Note = () => {
 
@@ -13,10 +11,6 @@ export const Note = () => {
         <div className="description">
             A page to view different notes created by users
         </div>
-        <InfiniteScroll dataLength={notes.length} 
-        next={fetchNotes()}
-        hasMore={hasMore}
-        loader={<p></p>}>
         {notes.map(note => (
             <div className = "mappedData"key={note.id}>
                 <p>Name: {note.title}<br></br>
@@ -25,7 +19,6 @@ export const Note = () => {
                 Team: {note.teamId}<br></br></p>
             </div>
         ))}
-        </InfiniteScroll>
         </div>   
     )
 }

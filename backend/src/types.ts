@@ -124,4 +124,25 @@ export type SearchParams = {
 export type UserPagination = {
     users: UserAttributes[],
     pages: number
+    currentPage: number,
+    totalResults: number
+};
+
+export type TeamPagination = {
+    teams: TeamAttributes[],
+    pages: number,
+    currentPage: number,
+    totalResults: number,
+};
+
+export type NotePagination = {
+    notes: NoteAttributes[],
+    pages: number,
+    currentPage: number,
+    totalResults: number,
+};
+
+export interface PaginationRequest extends Request  {
+    page: number
 }
+

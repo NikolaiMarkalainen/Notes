@@ -2,7 +2,7 @@ import express from "express";
 import userService from '../services/userService';
 import { RequestHandler } from "express";
 import {toNewUserEntry, updateUserEntry} from "../utils/userUtils";
-import { SearchRequest, UserAttributes} from "../types";
+import { PaginationRequest, SearchRequest, UserAttributes } from "../types";
 import  {searchMiddleware, tokenExtractor}from "../utils/middleware";
 const router = express.Router();
 // async has to be labeled as RequestHandler to function properly in requests
@@ -17,17 +17,19 @@ router.get('/', searchMiddleware (['name','username','teamId','admin']), (async 
 }) as RequestHandler);
 
 
+router.get('/pagination', (async (req: PaginationRequest, res) => {
+    const {page}  = req.query;
+    const users = await userService.getPaginatedUsers(Number(page));
+    if(users) res.send(users);
+    else throw Error('Not found');
+})  as RequestHandler);
+
+
 router.get('/:id', (async (req,res) => {
     const user = await userService.findById(Number(req.params.id));
     if(user) res.send(user);
     else throw Error('Not found'); 
 }) as RequestHandler );
-
-router.get('/pagination/:page', (async (req, res) => {
-    const users = await userService.getPaginatedUsers(Number(req.params.page));
-    if(users) res.send(users);
-    else throw Error('Not found');
-})  as RequestHandler)
 
 router.post('/', tokenExtractor, (async (req, res) => {
     const newUser = toNewUserEntry(req.body);

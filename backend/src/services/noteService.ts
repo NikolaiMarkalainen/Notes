@@ -1,6 +1,6 @@
 
 import { Note } from "../models/index";
-import { NewNoteEntry, NoteAttributes, SearchRequest, NoteSearchParams } from "../types";
+import { NewNoteEntry, NoteAttributes, SearchRequest, NoteSearchParams, NotePagination } from "../types";
 
 const getNotes = async  (req : SearchRequest): Promise <NoteAttributes[]> => {
     const where: NoteSearchParams= req.where || {};
@@ -8,6 +8,23 @@ const getNotes = async  (req : SearchRequest): Promise <NoteAttributes[]> => {
     console.log(notes.map((note) => note.toJSON()));
     return notes.map((note) => note.toJSON());
 };
+
+const getPaginatedNotes = async( page : number ): Promise<NotePagination> =>  {
+    try{
+        const LIMIT = 3;
+        const OFFSET = (Number(page)- 1) * LIMIT;        
+        const amount = await Note.count();
+        const notes = await Note.findAll({
+            limit: LIMIT,
+            offset: OFFSET,
+        });
+        const pages = Math.ceil(amount / LIMIT);
+        return {notes, pages, currentPage: page, totalResults: amount};
+    } catch(error){
+        throw new Error('Failed to fetch pagination');
+    }
+};
+
 
 const findById = async (id: number): Promise<NoteAttributes | null> => {
     const notes = await Note.findByPk(id);
@@ -38,5 +55,5 @@ const updateNote = async (id: number, updateNote: NoteAttributes): Promise<NoteA
 };
 
  export default {
-    createNotes, findById, getNotes, removeNote, updateNote
+    createNotes, findById, getNotes, removeNote, updateNote, getPaginatedNotes
 };

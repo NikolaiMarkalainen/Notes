@@ -47,8 +47,14 @@ export type TeamCreation = {
 export type UserState = {
     users: User[],
     status: status,
-    error: null
+    error: null,
 };
+
+export type ListResponse<T> = {
+    pages: number,
+    currentPage: number
+    data: T[]
+}
 
 export type NoteState = {
     notes: Note[],
