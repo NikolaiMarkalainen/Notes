@@ -1,13 +1,17 @@
 import { Route, Routes,Link } from 'react-router-dom';
-import {Team, User,Note, Home, Login, Logout} from "./components"
+import {Team, User,Note, Home, Login, Logout, Notification} from "./components"
 import 'bootstrap/dist/css/bootstrap.min.css';
 import "./styles.css"
+import { useAppSelector } from './hooks';
+import { useState } from 'react';
 
 
 
 const App = () => {
+
   return (
     <div className='background-body'>
+      <Notification />
       <div className='Link-parent'>
         <Link className='link-dark'to="/">Home</Link>
         <Link className='link-dark'to="/users">Users</Link>

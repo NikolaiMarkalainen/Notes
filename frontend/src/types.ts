@@ -166,3 +166,7 @@ export type ErrorType = {
         message: string
     }
 }
+
+export type NotificationContent = {
+    message: string
+};

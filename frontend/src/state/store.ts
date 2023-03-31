@@ -1,11 +1,14 @@
 import { configureStore } from "@reduxjs/toolkit";
-import {userSlice, noteSlice, teamSlice } from "./index";
+import {userSlice, noteSlice, teamSlice, notificationSlice } from "./index";
+import { Api } from "./index";
 
 const store = configureStore({
     reducer: {
         users: userSlice.reducer,
         teams: teamSlice.reducer,
         notes: noteSlice.reducer,
+        notification: notificationSlice.reducer,
+        [Api.reducerPath]: Api.reducer,
     },
 });
 

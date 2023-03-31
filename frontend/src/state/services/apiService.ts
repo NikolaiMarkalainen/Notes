@@ -54,7 +54,7 @@ export const Api = createApi({
                 method: 'POST',
                 body: login,
             })
-        })
+        }),
     }),
 });
 

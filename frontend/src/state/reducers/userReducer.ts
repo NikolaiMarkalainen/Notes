@@ -23,7 +23,6 @@ export const userSlice = createSlice({
                     id: state.users.length + 1,
                 });
             },
-        
     },
 })
 
