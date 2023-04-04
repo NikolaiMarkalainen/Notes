@@ -14,7 +14,7 @@ export const notificationSlice = createSlice({
             state.message = action.payload;
         },
         clearMessage(state){
-            return initialState;
+            state.message = '';
         },
     },
 });

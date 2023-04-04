@@ -1,6 +1,7 @@
 import { configureStore } from "@reduxjs/toolkit";
 import {userSlice, noteSlice, teamSlice, notificationSlice } from "./index";
 import { Api } from "./index";
+import { curryGetDefaultMiddleware } from "@reduxjs/toolkit/dist/getDefaultMiddleware";
 
 const store = configureStore({
     reducer: {
@@ -10,6 +11,7 @@ const store = configureStore({
         notification: notificationSlice.reducer,
         [Api.reducerPath]: Api.reducer,
     },
+    middleware: (curryGetDefaultMiddleware) => curryGetDefaultMiddleware().concat(Api.middleware),
 });
 
 export default store;

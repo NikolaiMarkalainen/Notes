@@ -1,4 +1,5 @@
 import { useState } from "react"
+import { useAppDispatch } from "../hooks";
 import { setMessage, useLoginUserMutation } from "../state";
 import { ErrorType, LoginParams } from "../types";
 
@@ -6,15 +7,17 @@ export const Login = () => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [loginUser, { data, error, isLoading, isError }] = useLoginUserMutation();
+    const dispatch = useAppDispatch();
     const handleLogin = async (event: React.FormEvent<HTMLFormElement>, data: LoginParams) => {
         event.preventDefault();
         try {
             const response = await loginUser(data).unwrap();
-            setMessage(response.message);
+            const message = response.message;
+            dispatch(setMessage(message));
             console.log(response);
         } catch (error:any) {
             const err = error; 
-            setMessage(err);
+            dispatch(setMessage(err.data.message));
         }
     }
         return(
