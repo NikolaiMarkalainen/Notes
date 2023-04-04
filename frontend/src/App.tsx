@@ -19,7 +19,8 @@ const App = () => {
         <Link className='link-dark'to="/notes">Notes</Link>
         <Link className='link-dark' to="/login">Login</Link>
         <Link className='link-dark' to ="logout">Logout</Link>
-      </div>
+      </div>  
+      <>
       <Routes>
         <Route index element={<Home/>}/>
         <Route path="/users" element={<User/>}></Route>
@@ -27,8 +28,8 @@ const App = () => {
         <Route path="/notes" element={<Note/>}></Route>
         <Route path="/login" element={<Login/>}></Route>
         <Route path="/logout" element={<Logout/>}></Route>
-
       </Routes>
+      </>
     </div>
   )
 }
