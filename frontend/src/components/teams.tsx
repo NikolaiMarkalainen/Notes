@@ -19,14 +19,18 @@ export const Team = () => {
     const maxPages = teams.pages;
     return(
         <div>
-            <h1>Teams</h1>
-        {teams.teams.map(team => (
-            <div key={team.id}>
-                <p>Name: {team.name}</p>
+        <h1 className="description">Teams</h1>
+        <div className="card-container">
+            {teams.teams.map(team => (
+            <div className="card" key={team.id}>
+                <h5 className="card-title">{team.name}</h5>
             </div>
         ))}
-        <button onClick={() => setPage( page - 1)} disabled={isFetching || page <= 1 }> Back </button>
-        <button onClick={() => setPage( page + 1)} disabled={isFetching || page === maxPages }> Next </button>
-        </div>   
+        <div className="button-container">
+        <button className="btn btn-primary" onClick={() => setPage( page - 1)} disabled={isFetching || page <= 1 }> Back </button>
+        <button className="btn btn-primary" onClick={() => setPage( page + 1)} disabled={isFetching || page === maxPages }> Next </button>
+        </div>
+        </div>
+        </div> 
     )
 }

@@ -19,16 +19,20 @@ export const User = () => {
     const maxPages = users.pages;
     return(
         <div>
-            <h1>Users</h1>
+        <h1 className="description" >Users</h1>
+        <div className="card-container">
             {users.users.map(user => (
-            <div key={user.id}>
-            <p>Name: {user.name}</p>
-            <p>Username: {user.username}</p>
-            <p>Admin: {user.admin.toString()}</p>
+            <div className="card" key={user.id}>
+            <h5 className="card-title"> {user.name}</h5>
+            <h6 className="card-subtitle">{user.username}</h6>
+            <p className="card-text">Admin: {user.admin.toString()}</p>
             </div>
         ))}
-        <button onClick={() => setPage( page - 1)} disabled={isFetching || page <= 1 }> Back </button>
-        <button onClick={() => setPage( page + 1)} disabled={isFetching || page === maxPages }> Next </button>
+        <div className="button-container">
+        <button className="btn btn-primary" onClick={() => setPage( page - 1)} disabled={isFetching || page <= 1 }> Back </button>
+        <button className="btn btn-primary" onClick={() => setPage( page + 1)} disabled={isFetching || page === maxPages }> Next </button>
+        </div>
+        </div>
         </div>   
     )
 }

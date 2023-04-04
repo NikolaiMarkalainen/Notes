@@ -20,19 +20,20 @@ export const Note = () => {
     return(
         <div>
         <h1 className="description">Notes</h1>
-        <div className="description">
-            A page to view different notes created by users
-        </div>
+        <div className="card-container">
         {notes.notes.map(note => (
-            <div className = "mappedData"key={note.id}>
-                <p>Name: {note.title}<br></br>
-                Author: {note.author}<br></br>
-                Content: {note.content}<br></br>
-                Team: {note.teamId}<br></br></p>
+            <div className = "card"key={note.id}>
+                <h5 className="card-title">{note.title}</h5>
+                <h6 className="card-subtitle">By {note.author}</h6>
+                <p className="card-text"> {note.content}</p>
+                <button className="btn btn-primary card-button"> {note.teamId}</button>
             </div>
         ))}
-        <button onClick={() => setPage( page - 1)} disabled={isFetching || page <= 1 }> Back </button>
-        <button onClick={() => setPage( page + 1)} disabled={isFetching || page === maxPages }> Next </button>
+        <div className="button-container">
+            <button className="btn btn-primary" onClick={() => setPage( page - 1)} disabled={isFetching || page <= 1 }> Back </button>
+            <button className="btn btn-primary" onClick={() => setPage( page + 1)} disabled={isFetching || page === maxPages }> Next </button>
+        </div>
+        </div>
         </div>   
     )
 }

@@ -1,3 +1,4 @@
+
 .h1{
     padding:5000px;
 }
@@ -43,3 +44,40 @@
     justify-content: center;
     font-size: 24;
 }
+
+.card-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-content: flex-start;
+    height: 100%;
+    margin-bottom: 20px;
+  }
+  
+.card {
+    border: 1px solid black;
+    width: calc(50% - 10px);
+    height: 50%;
+    margin: 5px;
+    padding: 10px;
+    overflow: scroll;
+}
+
+.card-text {
+    height: 300px;
+    width: 50%;
+    font-size: 16px;
+}
+.card-button {
+    display: block;
+    margin: 0 auto;
+}
+
+
+.button-container {
+    padding-bottom: 100px;
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+  }
