@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
-import { User, UserState, UserCreation, status, ListResponse } from "../../types"
+import { User, UserState, UserCreation, status, ListResponse } from "../../types/types"
 
 const initialState: UserState = {
     users: [],

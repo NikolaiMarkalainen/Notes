@@ -1,7 +1,7 @@
 import { useState } from "react"
 import { useAppDispatch, useAppSelector } from "../hooks";
 import { setLoggedState, setMessage, useLoginUserMutation } from "../state";
-import { ErrorType, LoginParams } from "../types";
+import { ErrorType, LoginParams } from "../types/types";
 import { useNavigate } from "react-router-dom";
 export const Login = () => {
     const [username, setUsername] = useState('');

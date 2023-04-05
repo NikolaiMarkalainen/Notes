@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../hooks";
 import {clearLoggedState, useLogoutUserMutation, setMessage } from "../state"
-import { LoggedState } from "../types";
+import { LoggedState } from "../types/types";
 
 export const Logout = () => {
     const [user, {}] = useLogoutUserMutation();
@@ -30,7 +30,7 @@ export const Logout = () => {
     return(
         <div>
             <h1>
-                Welcome <span> {userLogData.user?.username} </span>
+                Welcome <span> {userLogData.user?.name} </span>
                 <button onClick={(event) => handleLogOut(event, userLogData)}> Logout </button>
             </h1>
         </div>

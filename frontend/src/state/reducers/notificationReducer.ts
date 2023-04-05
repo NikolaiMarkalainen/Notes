@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { NotificationContent } from "../../types";
+import { NotificationContent } from "../../types/types";
 
 const initialState: NotificationContent = {
     message: ''

@@ -2,9 +2,7 @@ import {createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { CreateNoteResponse, NotePagination, NoteCreation, Note, 
     UserCreation, UserPagination, CreateUserResponse, User,
     TeamCreation, TeamPagination, CreateTeamResponse, Team,
-    LoginParams, LoginResponse, LoggedState, LogoutResponse   } from "../../types";
-import { useAppDispatch } from '../../hooks';
-import { setLoggedState } from '../reducers/loggedUser';
+    LoginParams, LoginResponse, LoggedState, LogoutResponse  } from "../../types/types";
 import { RootState } from '../store';
 
 const baseQuery = fetchBaseQuery({
@@ -35,9 +33,13 @@ export const Api = createApi({
         getAllNotes: builder.query<Note, void>({
             query:() => 'notes'
         }),
+        getUserSpecificNotes: builder.query<Note[], number>({
+            query:(id) => `notes?userId=${id}`
+        }),
         getPaginatedTeams: builder.query<TeamPagination, number>({
             query: (page) => `teams/pagination?page=${page}`,
         }),
+
         createTeam: builder.mutation<CreateTeamResponse, TeamCreation>({
             query: (note) => ({
                 url: 'teams',
@@ -83,6 +85,6 @@ export const {
     useGetPaginatedNotesQuery, useCreateNoteMutation, useGetAllNotesQuery,
     useGetPaginatedTeamsQuery, useCreateTeamMutation, useGetAllTeamsQuery,
     useGetPaginatedUsersQuery, useCreateUserMutation, useGetAllUsersQuery,
-    useLoginUserMutation, useLogoutUserMutation, 
+    useLoginUserMutation, useLogoutUserMutation, useGetUserSpecificNotesQuery,
 } = Api
 
