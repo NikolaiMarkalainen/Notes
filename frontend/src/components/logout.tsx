@@ -4,8 +4,7 @@ import {clearLoggedState, useLogoutUserMutation, setMessage } from "../state"
 import { LoggedState } from "../types";
 
 export const Logout = () => {
-    const [user, { data }] = useLogoutUserMutation();
-    console.log(useAppSelector(state => state.login));
+    const [user, {}] = useLogoutUserMutation();
     const dispatch = useAppDispatch();
     const navigate = useNavigate();
     const userLogData = useAppSelector(state => state.login)
@@ -14,7 +13,6 @@ export const Logout = () => {
         try{
             event.preventDefault();
             const response = await user(data).unwrap();
-            console.log(response);
             dispatch(setMessage(response.message));
             dispatch(clearLoggedState());
             setTimeout(() => {

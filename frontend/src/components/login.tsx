@@ -6,17 +6,13 @@ import { useNavigate } from "react-router-dom";
 export const Login = () => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
-    const [loginUser, { data, error, isLoading, isError }] = useLoginUserMutation();
+    const [loginUser, { }] = useLoginUserMutation();
     const dispatch = useAppDispatch();
     const navigate = useNavigate();
-
-    console.log(data);
-
     const handleLogin = async (event: React.FormEvent<HTMLFormElement>, data: LoginParams) => {
         event.preventDefault();
         try {
             const response = await loginUser(data).unwrap();
-            console.log(response);
             const message = response.message;
             dispatch(setMessage(message));
             dispatch(setLoggedState({

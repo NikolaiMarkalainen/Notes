@@ -1,14 +1,9 @@
 import { Route, Routes,Link } from 'react-router-dom';
-import {Team, User,Note, Home, Login, Logout, Notification} from "./components"
+import {Team, User,Note, Home, Login, Logout, Notification, AuthenticatedLink } from "./components"
 import 'bootstrap/dist/css/bootstrap.min.css';
 import "./styles.css"
-import { useAppSelector } from './hooks';
-import { useState } from 'react';
-
-
 
 const App = () => {
-
   return (
     <div className='background-body'>
       <Notification />
@@ -17,8 +12,7 @@ const App = () => {
         <Link className='link-dark'to="/users">Users</Link>
         <Link className='link-dark'to="/teams">Teams</Link>
         <Link className='link-dark'to="/notes">Notes</Link>
-        <Link className='link-dark' to="/login">Login</Link>
-        <Link className='link-dark' to ="logout">Logout</Link>
+        <AuthenticatedLink/>
       </div>  
       <>
       <Routes>
