@@ -157,7 +157,9 @@ export type LoginResponse = {
         data?:{
             message: string
         }
-    }
+    },
+    user: User,
+    token: string
 }
 
 export type ErrorType = {
@@ -170,3 +172,23 @@ export type ErrorType = {
 export type NotificationContent = {
     message: string
 };
+
+
+
+export type LoggedState = {
+    user: User | null,
+    token: string,
+    isLogged: boolean;
+}
+
+export type LogoutResponse = {
+    message: string,
+    error:{
+        data?:{
+            message: string
+        }
+    }
+    user: User | null,
+    token: string,
+    isLogged: boolean;
+}

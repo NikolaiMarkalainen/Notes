@@ -2,12 +2,25 @@ import {createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { CreateNoteResponse, NotePagination, NoteCreation, Note, 
     UserCreation, UserPagination, CreateUserResponse, User,
     TeamCreation, TeamPagination, CreateTeamResponse, Team,
-    LoginParams, LoginResponse   } from "../../types";
+    LoginParams, LoginResponse, LoggedState, LogoutResponse   } from "../../types";
+import { useAppDispatch } from '../../hooks';
+import { setLoggedState } from '../reducers/loggedUser';
+import { RootState } from '../store';
 
+const baseQuery = fetchBaseQuery({
+    baseUrl: 'http://localhost:8080/api/',
+    prepareHeaders: (headers, { getState }) => {
+      const token = (getState() as RootState).login.token;
+      if (token) {
+        headers.set('Authorization', `Bearer ${token}`);
+      }
+      return headers;
+    },
+  });
 
 export const Api = createApi({
     reducerPath: 'Api',
-    baseQuery: fetchBaseQuery({baseUrl: 'http://localhost:8080/api/'}),
+    baseQuery,
     endpoints: (builder) => ({
         getPaginatedNotes: builder.query<NotePagination, number>({
             query: (page) => `notes/pagination?page=${page}`,
@@ -49,12 +62,19 @@ export const Api = createApi({
             query:() => 'users',
         }),
         loginUser: builder.mutation<LoginResponse, LoginParams>({
-            query: (login: LoginParams) => ({
+            query: (login: LoginParams ) => ({
                 url: 'login',
                 method: 'POST',
                 body: login,
             })
         }),
+        logoutUser: builder.mutation<LogoutResponse, LoggedState>({
+            query: (logout: LoggedState) => ({
+                url: '/logout',
+                method: 'DELETE',
+                body: logout,
+            }),
+        })
     }),
 });
 
@@ -63,6 +83,6 @@ export const {
     useGetPaginatedNotesQuery, useCreateNoteMutation, useGetAllNotesQuery,
     useGetPaginatedTeamsQuery, useCreateTeamMutation, useGetAllTeamsQuery,
     useGetPaginatedUsersQuery, useCreateUserMutation, useGetAllUsersQuery,
-    useLoginUserMutation, 
+    useLoginUserMutation, useLogoutUserMutation, 
 } = Api
 

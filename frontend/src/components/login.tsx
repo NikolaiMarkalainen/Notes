@@ -1,6 +1,6 @@
 import { useState } from "react"
-import { useAppDispatch } from "../hooks";
-import { setMessage, useLoginUserMutation } from "../state";
+import { useAppDispatch, useAppSelector } from "../hooks";
+import { setLoggedState, setMessage, useLoginUserMutation } from "../state";
 import { ErrorType, LoginParams } from "../types";
 import { useNavigate } from "react-router-dom";
 export const Login = () => {
@@ -16,14 +16,24 @@ export const Login = () => {
         event.preventDefault();
         try {
             const response = await loginUser(data).unwrap();
+            console.log(response);
             const message = response.message;
             dispatch(setMessage(message));
+            dispatch(setLoggedState({
+                isLogged: true,
+                user: response.user,
+                token: response.token
+            }));
             setTimeout(() => {
                 navigate('/');
             }, 2000)
         } catch (error:any) {
             const err = error; 
-            dispatch(setMessage(err.data.message));
+            if(err.data){
+                dispatch(setMessage(err.data.message));
+            } else {
+                dispatch(setMessage(err.message));
+            }
         }
     }
         return(

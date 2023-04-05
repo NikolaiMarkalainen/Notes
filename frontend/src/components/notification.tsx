@@ -6,9 +6,11 @@ import { NotificationContent } from "../types";
 
 export const Notification = () => {
     const message = useAppSelector(state => state.notification.message);
+    const loggeduser = useAppSelector(state => state.login);
     const dispatch = useAppDispatch();
     
     console.log(message);
+    console.log(loggeduser);
     if (!message) {
         return null;
     };
