@@ -80,7 +80,18 @@ export interface Config {
 export type LoginData = {
     username: string,
     password: string
+}
+
+export type LoginPromise = {
+    user: User,
+    token: string
 };
+
+export interface LogoutRequest extends Request{
+    token: string
+}
+
+export type LogoutPromiseWithoutToken = Omit<LoginPromise, 'token'>;
 
 export interface AuthenticatedRequest extends Request {
     user: User,

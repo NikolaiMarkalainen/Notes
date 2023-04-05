@@ -9,6 +9,9 @@ export const Login = () => {
     const [loginUser, { data, error, isLoading, isError }] = useLoginUserMutation();
     const dispatch = useAppDispatch();
     const navigate = useNavigate();
+
+    console.log(data);
+
     const handleLogin = async (event: React.FormEvent<HTMLFormElement>, data: LoginParams) => {
         event.preventDefault();
         try {

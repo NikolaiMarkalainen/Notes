@@ -17,7 +17,7 @@ app.use(cors());
 app.use('/notes', NoteRouter);
 app.use('/teams', TeamRouter);
 app.use('/users', UserRouter);
-app.use('/login', LoginRouter);
+app.use('/', LoginRouter);
 app.use(errorHandler);
 
 const start = async () => {
