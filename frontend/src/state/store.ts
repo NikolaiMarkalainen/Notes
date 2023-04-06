@@ -1,6 +1,6 @@
 import { configureStore } from "@reduxjs/toolkit";
 import {userSlice, noteSlice, teamSlice, notificationSlice, LoggedUserSlice } from "./index";
-import { Api } from "./index";
+import { Api, NoteApi } from "./index";
 
 const store = configureStore({
     reducer: {
@@ -10,8 +10,10 @@ const store = configureStore({
         notification: notificationSlice.reducer,
         login: LoggedUserSlice.reducer,
         [Api.reducerPath]: Api.reducer,
+        [NoteApi.reducerPath]: Api.reducer,
     },
     middleware: (curryGetDefaultMiddleware) => curryGetDefaultMiddleware().concat(Api.middleware),
+    
 });
 
 
