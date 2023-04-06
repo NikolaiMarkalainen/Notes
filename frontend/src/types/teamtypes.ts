@@ -30,3 +30,5 @@ export type Team ={
     name: string,
     id: number
 };
+
+export type TeamArray = Team[];

@@ -1,5 +1,5 @@
 import { Api } from "./apiService"
-import { TeamPagination, CreateTeamResponse, TeamCreation, Team } from "../../types/teamtypes"
+import { TeamPagination, CreateTeamResponse, TeamCreation, TeamArray } from "../../types/teamtypes"
 
 export const TeamApi = Api.injectEndpoints({
     endpoints: (builder) =>({
@@ -14,7 +14,7 @@ export const TeamApi = Api.injectEndpoints({
                 body: note,
             })
         }),
-        getAllTeams: builder.query<Team, void>({
+        getAllTeams: builder.query<TeamArray, void>({
             query:() => 'teams',
         }),
     })

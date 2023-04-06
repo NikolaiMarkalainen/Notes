@@ -24,7 +24,7 @@ const getTeams = async  (req : SearchRequest): Promise <TeamAttributes[]> => {
 
 const getPaginatedTeams = async( page : number ): Promise<TeamPagination> =>  {
     try{
-        const LIMIT = 3;
+        const LIMIT = 5;
         const OFFSET = (Number(page)- 1) * LIMIT;        
         const amount = await Team.count();
         const teams = await Team.findAll({

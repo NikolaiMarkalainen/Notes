@@ -6,7 +6,10 @@ export const AuthenticatedLink = () => {
 
     if(loggedUser.isLogged){
         return(
-          <Link className='link-dark' to ="logout">Logout</Link>
+          <>   
+          <Link className='link-dark' to="logout">Logout</Link>
+          <Link className="link-dark" to="Profile">Profile</Link>
+          </>
         )
       } else {
         return (

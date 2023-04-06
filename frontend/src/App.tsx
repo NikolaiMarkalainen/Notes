@@ -1,7 +1,7 @@
 import { Route, Routes,Link } from 'react-router-dom';
-import {Team, User,Note, Home, Login, Logout, Notification, AuthenticatedLink } from "./components"
+import {Team, User,Note, Home, Login, Logout, Notification, AuthenticatedLink, Profile } from "./components"
 import 'bootstrap/dist/css/bootstrap.min.css';
-import "./styles.css"
+import "./styles/styles.css"
 
 const App = () => {
   return (
@@ -22,6 +22,7 @@ const App = () => {
         <Route path="/notes" element={<Note/>}></Route>
         <Route path="/login" element={<Login/>}></Route>
         <Route path="/logout" element={<Logout/>}></Route>
+        <Route path="/profile" element={<Profile/>}></Route>
       </Routes>
       </>
     </div>

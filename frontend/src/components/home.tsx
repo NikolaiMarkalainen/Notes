@@ -1,6 +1,5 @@
 import { useAppSelector } from '../hooks';
 import { useGetUserSpecificNotesQuery } from '../state';
-import '../styles.css';
 
 
 export const Home =() => {

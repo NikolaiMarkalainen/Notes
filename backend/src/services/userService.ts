@@ -11,7 +11,7 @@ const getUsers = async  (req: SearchRequest ): Promise <UserAttributes[]> => {
 const getPaginatedUsers = async( page : number ): Promise<UserPagination> =>  {
     try{
         console.log("PAGE NUMBER",page);
-        const LIMIT = 3;
+        const LIMIT = 5;
         const OFFSET = (Number(page)- 1) * LIMIT;        
         const amount = await User.count();
         if(!amount) throw Error('Not found');

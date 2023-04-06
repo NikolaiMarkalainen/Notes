@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { useGetPaginatedNotesQuery } from "../state";
-import "../styles.css"
 
 export const Note = () => {
 

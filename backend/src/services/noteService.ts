@@ -11,7 +11,7 @@ const getNotes = async  (req : SearchRequest): Promise <NoteAttributes[]> => {
 
 const getPaginatedNotes = async( page : number ): Promise<NotePagination> =>  {
     try{
-        const LIMIT = 3;
+        const LIMIT = 5;
         const OFFSET = (Number(page)- 1) * LIMIT;        
         const amount = await Note.count();
         const notes = await Note.findAll({
