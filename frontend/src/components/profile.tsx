@@ -18,7 +18,9 @@ export const Profile = () => {
         <form className="form-root">
             <div className="form-row">
             <div className="form-label">Username:</div>
-            <div className="form-data">{user?.username}</div>
+            <div className="form-data">{user?.username &&
+                 `${user.username.slice(0, 3)}*****@${user.username.split('@')[1]}`}
+            </div>
             <div className="form-input">
                 <input type="text" name="username" />
             </div>
@@ -39,7 +41,7 @@ export const Profile = () => {
             </div>
             <div className="form-row">
             <div className="form-label">Team:</div>
-            <div className="form-data">Team A</div>
+            <div className="form-data">{user?.teamId}</div>
             <div className="form-input">
                 <select name="team">
                 {teams?.map(team => {

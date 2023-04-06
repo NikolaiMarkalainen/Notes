@@ -1,39 +1,43 @@
 .profile-page {
-    word-wrap: break-word;
     display: flex;
     flex-direction: column;
     align-items: center;
     border: 1px solid #3333;
-    padding: 50px;
     margin: auto;
-    max-width: 50%;
-    margin-top: 50px;
-    margin-bottom: 50px;
+    width: min(80vw, 100vw);
+    height: min(80vh , 100vh);
     background-color: #e8a87c;
+    padding-top: min(5vh,15vh);
+    font-size: var(--step--2);
   }
   .form-root{
-    margin-top: 50px;
+    display: flex;
+    margin: min(2rem, 5rem);  
+    flex-direction: column;
+    height: min(60vh, 80vh);
+    width: min(60vw, 80vw);
+    overflow: auto;
+    font-size: var(--step--2);
+    
   }
   .form-row {
-    word-wrap: break-word;
     display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin: 10px 0;
-    max-width: 100%;
-    overflow: hidden;
+    justify-content: space-between;    
+    flex-direction: row;
+    font-size: var(--step--2);
+    margin-right: min(2rem,4rem);
+    flex-wrap: wrap;
   }
   
   .form-label {
-    font-weight: bold;
-    margin-right: 10px;
-    max-width: 100%;
-    overflow: hidden;
-    min-width: 120px;
+    margin-right: min(2rem,4rem);
   }
   
   .form-data {
-    flex: 1;
+    margin-bottom: 0.4rem;
+  }
+  .form-input{
+    margin-left:min(1rem, 2rem);
   }
   .button-color{
     background-color: #c38d9e !important;
@@ -41,9 +45,6 @@
   }
   .button-spacing{
     margin-bottom: 50px;
-  }
-  .form-input {
-    margin-left: 20px;
   }
   .button-color:hover{
     background-color: #85dcb8 !important;
