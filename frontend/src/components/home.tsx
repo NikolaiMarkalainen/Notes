@@ -1,6 +1,6 @@
 import { useAppSelector } from '../hooks';
 import { useGetUserSpecificNotesQuery } from '../state';
-
+import "../styles/homepage.css"
 
 export const Home =() => {
 
@@ -11,11 +11,10 @@ export const Home =() => {
         console.log(notes);
         if(notes){
             return(
-                <div>
-                    <h1> Homepage </h1>
-                    <div>Your notes: </div>
-                    <div>:D</div>
-                    <div>
+                <div className='home-container'>
+                    <div className='text-container'>
+                        <h1 className='homepage-title'> Homepage </h1>
+                        <div className='text-contents'>Your notes: </div>
                     </div>
                 </div>
             )

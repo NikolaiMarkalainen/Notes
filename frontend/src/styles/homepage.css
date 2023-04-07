@@ -1,0 +1,29 @@
+.home-container{
+    display: flex;
+    height: clamp(80vh, 90vh 100vh);
+    width: clamp(80vw, 90vw 100vw);
+    margin-left: 10vw;
+    margin-right: 10vw;
+    overflow: scroll;
+    align-items: flex-start;
+}
+
+.text-container{
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    height: clamp(60vh,70vh 80vh);
+    width: clamp(60vw, 70vw 80vw);
+}
+
+.homepage-title{
+    display: flex;  
+    margin-top: 3vh;
+    margin-bottom: 3vh;
+    margin-left: clamp(20vw, calc(70vw/3) , 40vw);
+}
+
+.text-contents{
+    display: flex;
+    align-self: baseline;
+}
