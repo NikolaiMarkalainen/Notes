@@ -25,8 +25,8 @@ module.exports = {
         ]);
         await queryInterface.bulkInsert('notes', [
             { title: 'First note', author: 'John Doe', content: 'This is my first note', user_id: 1, team_id: 1 },
-            { title: 'Second note', author: 'Jane Smith', content: 'This is my second note', user_id: 1, team_id: 1 },
-            { title: 'Third note', author: 'Bob Johnson', content: 'This is my third note', user_id: 1, team_id: 1 },
+            { title: 'Second note', author: 'Jane Smith', content: 'This is my second note', user_id: 2, team_id: 1 },
+            { title: 'Third note', author: 'Bob Johnson', content: 'This is my third note', user_id: 3, team_id: 1 },
             { title: 'Fourth note', author: 'Alice Johnson', content: 'This is my fourth note', user_id: 4, team_id: 4 },
             { title: 'Fifth note', author: 'Tom Brown', content: 'This is my fifth note', user_id: 5, team_id: 5 },
             { title: 'Sixth note', author: 'Emily Davis', content: 'This is my sixth note', user_id: 6, team_id: 6 },
